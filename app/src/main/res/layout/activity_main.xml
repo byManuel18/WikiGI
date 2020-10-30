@@ -45,13 +45,12 @@
                 android:text="Eventos" />
         </com.google.android.material.tabs.TabLayout>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="#FFFFFF"
-            tools:listitem="@layout/content_main" />
-
     </com.google.android.material.appbar.AppBarLayout>
+
+    <include
+        layout="@layout/listperson"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
