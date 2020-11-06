@@ -1,9 +1,11 @@
-package com.manueh.wikigi;
+package com.manueh.wikigi.views;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+
+import com.manueh.wikigi.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
