@@ -23,38 +23,6 @@
             app:title="Personajes"
             app:titleTextColor="#FF5722" />
 
-        <com.google.android.material.tabs.TabLayout
-            android:id="@+id/tablayaut"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            app:tabIndicatorColor="#FF5722"
-            app:tabSelectedTextColor="#FF5722">
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabperson"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Personajes" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabarte"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Artefactos" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabarm"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Armas" />
-
-            <com.google.android.material.tabs.TabItem
-                android:id="@+id/tabeven"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Eventos" />
-        </com.google.android.material.tabs.TabLayout>
-
     </com.google.android.material.appbar.AppBarLayout>
 
     <include
