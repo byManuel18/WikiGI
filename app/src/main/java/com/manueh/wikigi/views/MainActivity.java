@@ -21,6 +21,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity implements IListInterface.View {
     private IListInterface.Presenter presenter;
+    private  String TAG="Wikigi/Main_Activity";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
