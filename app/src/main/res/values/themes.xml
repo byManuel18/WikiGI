@@ -22,4 +22,8 @@
     <style name="Theme.WikiGI.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <style name="Theme.WikiGI.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="spinnerItemStyle" parent="android:Widget.TextView.SpinnerItem">
+
+    </style>
 </resources>

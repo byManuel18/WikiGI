@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Toolbar toolbar = findViewById(R.id.toolbar);
-        toolbar.setTitle("Personajes");
+        toolbar.setTitle(R.string.title_toolbar_MainActiity);
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         setSupportActionBar(toolbar);
         presenter =new ListPresenter(this);

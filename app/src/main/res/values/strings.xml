@@ -1,13 +1,16 @@
 <resources>
-    <string name="app_name">WikiGI</string>
+    <string name="app_name" translatable="false">WikiGI</string>
     <string name="action_settings">Settings</string>
-    <!-- Strings used for fragments for navigation -->
-    <string name="first_fragment_label">First Fragment</string>
-    <string name="second_fragment_label">Second Fragment</string>
-    <string name="next">Next</string>
-    <string name="previous">Previous</string>
+    <string name="title_activity_form_activity">Character Form</string>
+    <string name="date_form">Creation Date</string>
+    <string name="title_toolbar_MainActiity">Character List</string>
+    <string name="switch_form">Equip</string>
+    <string name="name_form">Name</string>
+    <string name="constellation_form">Constellation</string>
+    <string name="hp_form" translatable="false">Hp</string>
+    <string name="def_form" translatable="false">DEF</string>
+    <string name="atk_form" translatable="false">ATK</string>
+    <string name="save_form">Save</string>
+    <string name="cancel_form">Cancel</string>
 
-    <string name="hello_first_fragment">Hello first fragment</string>
-    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
-    <string name="title_activity_form_activity">Form_activity</string>
 </resources>
