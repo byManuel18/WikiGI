@@ -1,5 +1,9 @@
 <resources>
     <string name="app_name" translatable="false">WikiGI</string>
+    <string name="first_fragment_label" translatable="false">First Fragment</string>
+    <string name="second_fragment_label" translatable="false">Second Fragment</string>
+    <string name="next"  translatable="false">Next</string>
+    <string name="previous" translatable="false">Previous</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_form_activity">Character Form</string>
     <string name="date_form">Creation Date</string>
@@ -12,5 +16,8 @@
     <string name="atk_form" translatable="false">ATK</string>
     <string name="save_form">Save</string>
     <string name="cancel_form">Cancel</string>
+    <string name="name_error_null">Error, name cannot be empty</string>
+    <string name="name_error_validate">Error, name can only contain letters</string>
+    <string name="name_error_default">Unknown error</string>
 
 </resources>
