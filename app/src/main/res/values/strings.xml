@@ -19,5 +19,8 @@
     <string name="name_error_null">Error, name cannot be empty</string>
     <string name="name_error_validate">Error, name can only contain letters</string>
     <string name="name_error_default">Unknown error</string>
+    <string name="date_error_null">Error, create date cannot be empty</string>
+    <string name="date_error_validate">Error, incorrect create date format</string>
+    <string name="date_error_incorrect">Error, create date invalid</string>
 
 </resources>
