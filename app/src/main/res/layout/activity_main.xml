@@ -21,8 +21,16 @@
             app:logo="@drawable/icono2"
             app:popupTheme="@style/Theme.WikiGI.PopupOverlay"
             app:subtitleTextColor="#FFFFFF"
-            app:title="Personajes"
+            app:title="@string/title_toolbar_MainActiity"
             app:titleTextColor="#FF5722" />
+
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="0 Personajes encontrados"
+            android:textAlignment="center"
+            android:textColor="@android:color/holo_orange_dark" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
@@ -37,6 +45,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
         android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
+        android:backgroundTint="@color/purple_200"
+        app:srcCompat="@android:drawable/ic_menu_add" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
