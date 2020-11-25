@@ -22,5 +22,6 @@
     <string name="date_error_null">Error, create date cannot be empty</string>
     <string name="date_error_validate">Error, incorrect create date format</string>
     <string name="date_error_incorrect">Error, create date invalid</string>
+    <string name="action_search">Search</string>
 
 </resources>
