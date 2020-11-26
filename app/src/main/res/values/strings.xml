@@ -23,5 +23,49 @@
     <string name="date_error_validate">Error, incorrect create date format</string>
     <string name="date_error_incorrect">Error, create date invalid</string>
     <string name="action_search">Search</string>
+    <string name="action_about">About</string>
+    <string name="constellation_error_null">Error, constellation cannot be empty</string>
+    <string name="constellation_error_validate">Error, constellation can only contain letters</string>
+    <string name="hp_error_null">Error, hp cannot be empty</string>
+    <string name="hp_error_validate">Error, hp can only contain integer numbers</string>
+    <string name="atk_error_null">Error, atk cannot be empty</string>
+    <string name="atk_error_validate">Error, atk can only contain integer numbers</string>
+    <string name="def_error_null">Error, def cannot be empty</string>
+    <string name="def_error_validate">Error, def can only contain integer numbers</string>
+    <string name="butt_clear_form">Clear fields</string>
+    <string name="delete_menu_form">Delete</string>
+    <string name="spinner_add">Add new</string>
+    <string name="spinner_cancel">Cancel</string>
+    <!-- Spinner weapons -->
+    <string name="spinner_title">WEAPONS</string>
+    <string name="spinner_claymore" translatable="false">CLAYMORE</string>
+    <string name="spinner_bow">BOW</string>
+    <string name="spinner_spear">SPEAR</string>
+    <string name="spinner_sword">SWORD</string>
+    <string name="spinner_catalyst">CATALYST</string>
+    <!-- Spinner elements -->
+    <string name="spinner_elements">ELEMENTS</string>
+    <string name="spinner_ele1" translatable="false">PYRO</string>
+    <string name="spinner_ele2" translatable="false">GEO</string>
+    <string name="spinner_ele3" translatable="false">ANEMO</string>
+    <string name="spinner_ele4" translatable="false">HYDRO</string>
+    <string name="spinner_ele5" translatable="false">CRYO</string>
+    <string name="spinner_ele6" translatable="false">ELECTRO</string>
+    <!-- Spinner elements -->
+    <string name="spinner_tier_title">TIER</string>
+    <string name="spinner_tiers" translatable="false">S</string>
+    <string name="spinner_tiera" translatable="false">A</string>
+    <string name="spinner_tierb" translatable="false">B</string>
+    <string name="spinner_tierc" translatable="false">C</string>
+    <string name="spinner_tierd" translatable="false">D</string>
+    <!-- Spinner rol-->
+    <string name="spinner_rol_title" translatable="false">ROL</string>
+    <string name="spinner_rol1">HEALER</string>
+    <string name="spinner_rol2">SUPPORT</string>
+    <string name="spinner_rol3">TANK</string>
+    <string name="spinner_rol4" translatable="false">DPS</string>
+
+
+
 
 </resources>
