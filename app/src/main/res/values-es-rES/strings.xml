@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="action_settings">Ajustes</string>
+    <string name="title_activity_form_activity">Personaje</string>
+    <string name="date_form">Fecha Creación</string>
+    <string name="title_toolbar_MainActiity">Lista Personajes</string>
+    <string name="switch_form">Equipado</string>
+    <string name="name_form">Nombre</string>
+    <string name="constellation_form">Constelación</string>
+    <string name="save_form">Guardar</string>
+    <string name="cancel_form">Cancelar</string>
+    <string name="name_error_null">Error, el nombre no puede ser bacío</string>
+    <string name="name_error_validate">Error, el nombre solo puede contener letras</string>
+    <string name="name_error_default">Error desconocido</string>
+    <string name="date_error_null">Error, la fecha de creación no puede estar bacía</string>
+    <string name="date_error_validate">Error, formato de la fecha de creación incorrecto</string>
+    <string name="date_error_incorrect">Error, fecha de creación no válida</string>
+    <string name="action_search">Busqueda</string>
+    <string name="constellation_error_null">Error, constelación no puede estar bacío</string>
+    <string name="constellation_error_validate">Error, constelación solo pude tener letras</string>
+    <string name="hp_error_null">Error, hp no puede ser bacío</string>
+    <string name="hp_error_validate">Error, hp solo puede contener números enteros</string>
+    <string name="atk_error_null">Error, def no puede ser bacío</string>
+    <string name="def_error_null">Error, def no puede ser bacío</string>
+    <string name="atk_error_validate">Error, atk solo puede contener números enteros</string>
+    <string name="def_error_validate">Error, def solo puede contener números enteros</string>
+    <string name="butt_clear_form">Limpiar campos</string>
+    <string name="delete_menu_form">Eliminar</string>
+    <string name="spinner_add">Añadir nuevo</string>
+    <string name="spinner_title">ARMAS</string>
+    <string name="spinner_bow">ARCO</string>
+    <string name="spinner_spear">LANZA</string>
+    <string name="spinner_sword">ESPADA</string>
+    <string name="spinner_catalyst">CATALIZADOR</string>
+    <string name="spinner_cancel">Cancelar</string>
+    <string name="spinner_elements">ELEMENTOS</string>
+    <string name="spinner_tier_title">NIVEL</string>
+    <string name="spinner_rol2">APOYO</string>
+    <string name="spinner_rol3">TANQUE</string>
+    <string name="spinner_rol1">CURADOR</string>
+    <string name="action_about">Acerca de...</string>
+</resources>
