@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="action_settings">Ajustes</string>
+    <string name="action_settings">Configuración</string>
     <string name="title_activity_form_activity">Personaje</string>
     <string name="date_form">Fecha Creación</string>
     <string name="title_toolbar_MainActiity">Lista Personajes</string>
@@ -38,5 +38,8 @@
     <string name="spinner_rol2">APOYO</string>
     <string name="spinner_rol3">TANQUE</string>
     <string name="spinner_rol1">CURADOR</string>
-    <string name="action_about">Acerca de...</string>
+    <string name="action_about">Sobre AppCRUD</string>
+    <string name="action_help">Ayuda</string>
+    <string name="quantity_list_result">X Personajes encontrados</string>
+    <string name="title_activity_about_">Sobre el AppCRUD</string>
 </resources>

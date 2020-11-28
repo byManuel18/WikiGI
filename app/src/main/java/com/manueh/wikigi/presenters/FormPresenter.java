@@ -5,10 +5,13 @@ import com.manueh.wikigi.enums.Fields_to_validate;
 import com.manueh.wikigi.interfaces.IFormInterface;
 import com.manueh.wikigi.views.MyApplication;
 
-public class FormPresenter implements IFormInterface {
+public class FormPresenter implements IFormInterface.Presenter {
 
+    private IFormInterface.View view;
 
-
+    public FormPresenter(IFormInterface.View view) {
+        this.view = view;
+    }
 
     public static String getError(int error_code, Fields_to_validate ftv) {
         String ch="";

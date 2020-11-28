@@ -11,9 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.WikiGI">
         <activity
+            android:name=".views.About_Activity"
+            android:label="@string/title_activity_about_"
+            android:theme="@style/Theme.WikiGI.NoActionBar"></activity>
+        <activity
             android:name=".views.Form_activity"
             android:label="@string/title_activity_form_activity"
-            android:theme="@style/Theme.WikiGI.NoActionBar"></activity>
+            android:theme="@style/Theme.WikiGI.NoActionBar" />
         <activity android:name=".views.Logotype">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -17,4 +17,9 @@ public class ListPresenter implements IListInterface.Presenter {
         view.startFormAcrivity();
     }
 
+    @Override
+    public void onClickAbout() {
+        view.startAboutActivity();
+    }
+
 }
