@@ -114,4 +114,14 @@ public class FormPresenter implements IFormInterface.Presenter {
 
         return ch;
     }
+
+    @Override
+    public void ReturnToList() {
+        view.GoBackToList();
+    }
+
+    @Override
+    public void CloseFormActivity() {
+        view.CloseActivity();
+    }
 }

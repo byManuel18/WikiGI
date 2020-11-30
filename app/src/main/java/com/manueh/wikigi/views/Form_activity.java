@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.os.Build;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -14,6 +15,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -21,13 +23,16 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.manueh.wikigi.R;
 import com.manueh.wikigi.enums.Fields_to_validate;
+import com.manueh.wikigi.interfaces.IFormInterface;
 import com.manueh.wikigi.models.CharacterEntity;
 import com.manueh.wikigi.presenters.FormPresenter;
+import com.manueh.wikigi.presenters.ListPresenter;
 
 import java.util.ArrayList;
 import java.util.Calendar;
@@ -38,7 +43,8 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class Form_activity extends AppCompatActivity {
+public class Form_activity extends AppCompatActivity implements IFormInterface.View {
+    private IFormInterface.Presenter fpresenter;
     private  String TAG="Wikigi/Form_Activity";
     private TextInputEditText nameET;
     private TextInputEditText dateformET;
@@ -60,11 +66,13 @@ public class Form_activity extends AppCompatActivity {
     private ImageView image_elements;
     private ImageView imagetier;
     private ImageView imagerol;
+    private Button save;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_activity);
         myContext=this;
+        fpresenter=new FormPresenter(this);
         Log.d(TAG,"Obtener fecha actual");
         calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR) ;
@@ -82,7 +90,7 @@ public class Form_activity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Log.d(TAG,"Al clikar vuelve hacia detrás");
-                onBackPressed();
+                fpresenter.ReturnToList();
             }
         });
         character=new CharacterEntity();
@@ -169,6 +177,36 @@ public class Form_activity extends AppCompatActivity {
             }
         });
 
+        Button save=findViewById(R.id.save_button);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertdelete = new AlertDialog.Builder(Form_activity.this);
+                // alertdelete.setTitle(MyApplication.getContext().getResources().getString(R.string.button_delete));
+                alertdelete.setMessage(MyApplication.getContext().getResources().getString(R.string.title_alert_save));
+
+                alertdelete.setPositiveButton(MyApplication.getContext().getResources().getString(R.string.title_alert_save_acept), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG,"Yes button clicked");
+                        Toast toast1 =
+                                Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_save_acept_done), Toast.LENGTH_LONG);
+
+                        toast1.show();
+                        fpresenter.CloseFormActivity();
+                    }
+                });
+
+                alertdelete.setNegativeButton(MyApplication.getContext().getResources().getString(R.string.spinner_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "No button clicked");
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+        });
+
         Button clear_form=findViewById(R.id.clear_button);
         clear_form.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -231,6 +269,7 @@ public class Form_activity extends AppCompatActivity {
                 alertDialog.setView(viewAlertDialog);
                 // Recuperación del EditText del AlertDialog
                 final EditText dialogInput = (EditText) viewAlertDialog.findViewById(R.id.spinner_add_textedit);
+                dialogInput.setHint(getResources().getString(R.string.spinner_add));
                 // Configuración del AlertDialog
                 alertDialog
                         .setCancelable(false)
@@ -303,6 +342,7 @@ public class Form_activity extends AppCompatActivity {
                 alertDialog.setView(viewAlertDialog);
                 // Recuperación del EditText del AlertDialog
                 final EditText dialogInput = (EditText) viewAlertDialog.findViewById(R.id.spinner_add_textedit);
+                dialogInput.setHint(getResources().getString(R.string.spinner_add));
                 // Configuración del AlertDialog
                 alertDialog
                         .setCancelable(false)
@@ -373,6 +413,7 @@ public class Form_activity extends AppCompatActivity {
                 alertDialog.setView(viewAlertDialog);
                 // Recuperación del EditText del AlertDialog
                 final EditText dialogInput = (EditText) viewAlertDialog.findViewById(R.id.spinner_add_textedit);
+                dialogInput.setHint(getResources().getString(R.string.spinner_add));
                 // Configuración del AlertDialog
                 alertDialog
                         .setCancelable(false)
@@ -443,6 +484,7 @@ public class Form_activity extends AppCompatActivity {
                 alertDialog.setView(viewAlertDialog);
                 // Recuperación del EditText del AlertDialog
                 final EditText dialogInput = (EditText) viewAlertDialog.findViewById(R.id.spinner_add_textedit);
+                dialogInput.setHint(getResources().getString(R.string.spinner_add));
                 // Configuración del AlertDialog
                 alertDialog
                         .setCancelable(false)
@@ -499,6 +541,40 @@ public class Form_activity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        if(id==R.id.action_delete){
+
+            AlertDialog.Builder alertdelete = new AlertDialog.Builder(Form_activity.this);
+           // alertdelete.setTitle(MyApplication.getContext().getResources().getString(R.string.button_delete));
+            alertdelete.setMessage(MyApplication.getContext().getResources().getString(R.string.title_alert_delete_));
+
+            alertdelete.setPositiveButton(MyApplication.getContext().getResources().getString(R.string.title_alert_delete_acept), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d(TAG,"Yes button clicked");
+                    Toast toast1 =
+                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_delete_acept_done), Toast.LENGTH_LONG);
+
+                    toast1.show();
+                    fpresenter.CloseFormActivity();
+                }
+            });
+
+            alertdelete.setNegativeButton(MyApplication.getContext().getResources().getString(R.string.spinner_cancel), new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    Log.d(TAG, "No button clicked");
+                    dialog.dismiss();
+                }
+            }).create().show();
+
+
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     protected void onStart() {
         super.onStart();
     }
@@ -526,5 +602,15 @@ public class Form_activity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    public void GoBackToList() {
+        onBackPressed();
+    }
+
+    @Override
+    public void CloseActivity() {
+        finish();
     }
 }

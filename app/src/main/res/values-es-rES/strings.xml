@@ -42,4 +42,10 @@
     <string name="action_help">Ayuda</string>
     <string name="quantity_list_result">X Personajes encontrados</string>
     <string name="title_activity_about_">Sobre el AppCRUD</string>
+    <string name="title_alert_delete_">¿Seguro que desea eliminar este personaje?</string>
+    <string name="title_alert_delete_acept">Eliminar</string>
+    <string name="title_alert_delete_acept_done">¡¡¡Personaje eliminado!!!</string>
+    <string name="title_alert_save_acept">Guardar</string>
+    <string name="title_alert_save_acept_done">¡¡¡Personaje guardado!!!</string>
+    <string name="title_alert_save">¿Guardar personaje?</string>
 </resources>

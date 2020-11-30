@@ -73,6 +73,12 @@
 
     <string name="hello_first_fragment" translatable="false">Hello first fragment</string>
     <string name="hello_second_fragment" translatable="false">Hello second fragment. Arg: %1$s</string>
+    <string name="title_alert_delete_">Are you sure you want to remove this character?</string>
+    <string name="title_alert_delete_acept">Remuve</string>
+    <string name="title_alert_delete_acept_done">Character removed!!!</string>
+    <string name="title_alert_save">Save character?</string>
+    <string name="title_alert_save_acept_done">Character save!!!</string>
+    <string name="title_alert_save_acept">Save</string>
 
 
 </resources>
