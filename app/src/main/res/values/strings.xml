@@ -79,6 +79,10 @@
     <string name="title_alert_save">Save character?</string>
     <string name="title_alert_save_acept_done">Character save!!!</string>
     <string name="title_alert_save_acept">Save</string>
+    <string name="title_toolbar_search">Search Caracters</string>
+    <string name="title_search">Enter the search method</string>
+    <string name="butto_search">Search</string>
+    <string name="title_activity_search_">Search_Activity</string>
 
 
 </resources>

@@ -17,6 +17,7 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -44,6 +45,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Form_activity extends AppCompatActivity implements IFormInterface.View {
+    private Window window;
     private IFormInterface.Presenter fpresenter;
     private  String TAG="Wikigi/Form_Activity";
     private TextInputEditText nameET;
@@ -71,6 +73,8 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_form_activity);
+        this.window=getWindow();
+        this.window.setNavigationBarColor(getResources().getColor(R.color.black));
         myContext=this;
         fpresenter=new FormPresenter(this);
         Log.d(TAG,"Obtener fecha actual");

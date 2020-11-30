@@ -22,4 +22,9 @@ public class ListPresenter implements IListInterface.Presenter {
         view.startAboutActivity();
     }
 
+    @Override
+    public void OnClickSearch() {
+        view.startSearchActivity();
+    }
+
 }

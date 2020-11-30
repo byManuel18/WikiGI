@@ -1,6 +1,8 @@
 package com.manueh.wikigi.views;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -11,6 +13,7 @@ import com.manueh.wikigi.R;
 import com.manueh.wikigi.interfaces.IListInterface;
 import com.manueh.wikigi.presenters.ListPresenter;
 
+import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
@@ -18,10 +21,12 @@ import android.view.View;
 
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.Window;
 
 public class MainActivity extends AppCompatActivity implements IListInterface.View {
     private IListInterface.Presenter presenter;
     private  String TAG="Wikigi/Main_Activity";
+    private Window window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,6 +36,10 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         setSupportActionBar(toolbar);
         presenter =new ListPresenter(this);
+
+        this.window=getWindow();
+        this.window.setNavigationBarColor(getResources().getColor(R.color.black));
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +70,9 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         if(id==R.id.action_about){
             presenter.onClickAbout();
         }
+        if(id==R.id.action_search){
+            presenter.OnClickSearch();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -74,6 +86,12 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     @Override
     public void startAboutActivity() {
         Intent intent=new Intent(getApplicationContext(),About_Activity.class);
+        startActivity(intent);
+    }
+
+    @Override
+    public void startSearchActivity() {
+        Intent intent=new Intent(getApplicationContext(),Search_Activity.class);
         startActivity(intent);
     }
 

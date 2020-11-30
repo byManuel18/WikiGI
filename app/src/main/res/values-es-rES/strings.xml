@@ -48,4 +48,7 @@
     <string name="title_alert_save_acept">Guardar</string>
     <string name="title_alert_save_acept_done">¡¡¡Personaje guardado!!!</string>
     <string name="title_alert_save">¿Guardar personaje?</string>
+    <string name="title_toolbar_search">Buscar personajes</string>
+    <string name="title_search">Introduce el método de búsqueda</string>
+    <string name="butto_search">Buscar</string>
 </resources>

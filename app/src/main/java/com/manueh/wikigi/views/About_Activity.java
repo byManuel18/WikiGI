@@ -10,15 +10,19 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.View;
+import android.view.Window;
 
 import com.manueh.wikigi.R;
 
 public class About_Activity extends AppCompatActivity {
     private String TAG="About_Activity";
+    private Window window;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_about_);
+        this.window=getWindow();
+        this.window.setNavigationBarColor(getResources().getColor(R.color.black));
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         Log.d(TAG,"Creación de la flecha hacia atrás");
