@@ -51,4 +51,7 @@
     <string name="title_toolbar_search">Buscar personajes</string>
     <string name="title_search">Introduce el método de búsqueda</string>
     <string name="butto_search">Buscar</string>
+    <string name="search_byName">Nombre</string>
+    <string name="search_byDate">Fechar de creación</string>
+    <string name="error_search">Debe seleccionar algún metodo</string>
 </resources>

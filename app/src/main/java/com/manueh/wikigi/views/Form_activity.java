@@ -240,7 +240,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         // Asignar la fecha a un campo de texto
-                        dateformET.setText(String.valueOf(year) + "/" + String.valueOf(month) + "/" + String.valueOf(day));
+                        dateformET.setText(String.valueOf(year) + "/" + String.valueOf(month+1) + "/" + String.valueOf(day));
                     }
                 },Year, Month, Day);
                 // Mostrar el calendario

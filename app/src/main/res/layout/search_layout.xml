@@ -14,7 +14,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -42,6 +43,62 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+            <Spinner
+                android:id="@+id/spinner_search"
+                android:layout_width="200dp"
+                android:layout_height="40dp"
+                android:layout_marginTop="64dp"
+                android:background="@color/purple_200"
+                android:textAlignment="center"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView27" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinputeditext_name"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:hint="@string/name_form"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.497"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_name" />
+
+            <ImageView
+                android:id="@+id/imageView_name"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="44dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.498"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/spinner_search"
+                app:srcCompat="@drawable/name2" />
+
+            <ImageView
+                android:id="@+id/imageView_createdate"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="44dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textinputeditext_name"
+                app:srcCompat="@drawable/date" />
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/textinputEditText_cdate"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="44dp"
+                android:hint="@string/date_form"
+                android:textColor="@color/black"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/imageView_createdate" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 

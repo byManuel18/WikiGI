@@ -82,7 +82,10 @@
     <string name="title_toolbar_search">Search Caracters</string>
     <string name="title_search">Enter the search method</string>
     <string name="butto_search">Search</string>
-    <string name="title_activity_search_">Search_Activity</string>
+    <string name="title_activity_search_" translatable="false">Search_Activity</string>
+    <string name="search_byName">Name</string>
+    <string name="search_byDate">Create Date</string>
+    <string name="error_search">You must select some method</string>
 
 
 </resources>
