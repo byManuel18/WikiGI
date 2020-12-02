@@ -211,29 +211,13 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
-        Button clear_form=findViewById(R.id.clear_button);
-        clear_form.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                defET.setText("");
-                defET.setError(null);
-                atkformET.setText("");
-                atkformET.setError(null);
-                hpformET.setText("");
-                hpformET.setError(null);
-                nameET.setText("");
-                nameET.setError(null);
-                constellationformET.setText("");
-                constellationformET.setError(null);
-                dateformET.setText("");
-                dateformET.setError(null);
-            }
-        });
+
 
         imagedate=findViewById(R.id.imagedate);
         imagedate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d(TAG,"Crear calendario al clickar en la imagen");
                 // Definir el calendario con la fecha seleccionada por defecto
                 datePickerDialog = new DatePickerDialog(myContext, new DatePickerDialog.OnDateSetListener() {
                     // Definir la acción al pulsar OK en el calendario
@@ -264,6 +248,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         image_weapons.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"Crear el alertdialog");
                 // Recuperación de la vista del AlertDialog a partir del layout de la Actividad
                 LayoutInflater layoutActivity = LayoutInflater.from(myContext);
                 View viewAlertDialog = layoutActivity.inflate(R.layout.spinner_dialog, null);
@@ -281,6 +266,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setPositiveButton(getResources().getString(R.string.spinner_add),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si aceptamos en el alertdialog");
                                         boolean toadd=true;
                                         Pattern pat = Pattern.compile("[A-Za-zÑñ ]+");
                                         Matcher mat = pat.matcher(dialogInput.getText().toString());
@@ -313,6 +299,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setNegativeButton(getResources().getString(R.string.spinner_cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si cancelamos el alertdialog");
                                         dialogBox.cancel();
                                     }
                                 })
@@ -337,6 +324,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         image_elements.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"Crear el alertdialog");
                 // Recuperación de la vista del AlertDialog a partir del layout de la Actividad
                 LayoutInflater layoutActivity = LayoutInflater.from(myContext);
                 View viewAlertDialog = layoutActivity.inflate(R.layout.spinner_dialog, null);
@@ -354,6 +342,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setPositiveButton(getResources().getString(R.string.spinner_add),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si aceptamos el alertDialog");
                                         boolean toadd=true;
                                         Pattern pat = Pattern.compile("[A-Za-zÑñ ]+");
                                         Matcher mat = pat.matcher(dialogInput.getText().toString());
@@ -385,6 +374,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setNegativeButton(getResources().getString(R.string.spinner_cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si cancelamos el alertdialog");
                                         dialogBox.cancel();
                                     }
                                 })
@@ -408,6 +398,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         imagetier.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"Crear el alertdialog");
                 // Recuperación de la vista del AlertDialog a partir del layout de la Actividad
                 LayoutInflater layoutActivity = LayoutInflater.from(myContext);
                 View viewAlertDialog = layoutActivity.inflate(R.layout.spinner_dialog, null);
@@ -425,6 +416,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setPositiveButton(getResources().getString(R.string.spinner_add),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si aceptamos el alertdialog");
                                         boolean toadd=true;
                                         Pattern pat = Pattern.compile("[A-Za-zÑñ]");
                                         Matcher mat = pat.matcher(dialogInput.getText().toString());
@@ -456,6 +448,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setNegativeButton(getResources().getString(R.string.spinner_cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si cancelamos el alertdialog");
                                         dialogBox.cancel();
                                     }
                                 })
@@ -479,6 +472,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         imagerol.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Log.d(TAG,"Crear el alertdialog");
                 // Recuperación de la vista del AlertDialog a partir del layout de la Actividad
                 LayoutInflater layoutActivity = LayoutInflater.from(myContext);
                 View viewAlertDialog = layoutActivity.inflate(R.layout.spinner_dialog, null);
@@ -496,6 +490,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setPositiveButton(getResources().getString(R.string.spinner_add),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si aceptamos el alertdialog");
                                         boolean toadd=true;
                                         Pattern pat = Pattern.compile("[A-Za-zÑñ]+");
                                         Matcher mat = pat.matcher(dialogInput.getText().toString());
@@ -527,11 +522,35 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .setNegativeButton(getResources().getString(R.string.spinner_cancel),
                                 new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialogBox, int id) {
+                                        Log.d(TAG,"Si cancelamos el alertdialog");
                                         dialogBox.cancel();
                                     }
                                 })
                         .create()
                         .show();
+            }
+        });
+        Button clear_form=findViewById(R.id.clear_button);
+        clear_form.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.d(TAG,"Baciar campos");
+                defET.setText("");
+                defET.setError(null);
+                atkformET.setText("");
+                atkformET.setError(null);
+                hpformET.setText("");
+                hpformET.setError(null);
+                nameET.setText("");
+                nameET.setError(null);
+                constellationformET.setText("");
+                constellationformET.setError(null);
+                dateformET.setText("");
+                dateformET.setError(null);
+                spinner_element.setSelection(0);
+                spinner_rol.setSelection(0);
+                spinner_tier.setSelection(0);
+                spinner_weapons.setSelection(0);
             }
         });
 
@@ -548,6 +567,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     public boolean onOptionsItemSelected(MenuItem item) {
         int id=item.getItemId();
         if(id==R.id.action_delete){
+            Log.d(TAG,"Menú borrar personaje");
 
             AlertDialog.Builder alertdelete = new AlertDialog.Builder(Form_activity.this);
            // alertdelete.setTitle(MyApplication.getContext().getResources().getString(R.string.button_delete));

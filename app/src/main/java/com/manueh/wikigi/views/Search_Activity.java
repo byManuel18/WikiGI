@@ -48,10 +48,11 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search_);
         Spresenter=new SearchPresenter(this);
+        Log.d(TAG,"Poner barra de abajo en negro");
         this.window=getWindow();
         this.window.setNavigationBarColor(getResources().getColor(R.color.black));
         myContext=this;
-        Log.d(TAG,"Obtener fecha actual");
+        Log.d(TAG,"Get actual date");
         calendar = Calendar.getInstance();
         Year = calendar.get(Calendar.YEAR) ;
         Month = calendar.get(Calendar.MONTH);
@@ -69,7 +70,10 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                 Spresenter.onClickReturn();
             }
         });
+
+
         imageViewdate=findViewById(R.id.imageView_createdate);
+        Log.d(TAG,"Crear calendario al clickar en la imagen");
         imageViewdate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -93,6 +97,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
         cdate.setVisibility(View.INVISIBLE);
         cdate.setEnabled(false);
         button_search=findViewById(R.id.button_search);
+        Log.d(TAG,"Acción buscar");
         button_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -113,10 +118,13 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
         });
 
         spinner_search=findViewById(R.id.spinner_search);
+        Log.d(TAG,"Añadir los metodos de busqueda al spinner");
+
         String[] str={getResources().getString(R.string.butto_search),getResources().getString(R.string.search_byName),getResources().getString(R.string.search_byDate)};
         ArrayAdapter<String> adpater=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, str);
         adpater.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner_search.setAdapter(adpater);
+        Log.d(TAG,"Listener que según la opción del spinner oculta o muestra el método a buscar");
         spinner_search.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
             @Override

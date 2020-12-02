@@ -17,6 +17,7 @@ import androidx.annotation.ColorRes;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.util.Log;
 import android.view.View;
 
 import android.view.Menu;
@@ -36,7 +37,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         toolbar.setTextAlignment(View.TEXT_ALIGNMENT_CENTER);
         setSupportActionBar(toolbar);
         presenter =new ListPresenter(this);
-
+        Log.d(TAG,"Poner barra de abajo en negro");
         this.window=getWindow();
         this.window.setNavigationBarColor(getResources().getColor(R.color.black));
 
