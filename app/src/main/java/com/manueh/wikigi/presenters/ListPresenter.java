@@ -27,4 +27,9 @@ public class ListPresenter implements IListInterface.Presenter {
         view.startSearchActivity();
     }
 
+    @Override
+    public void OnClickRecyclerViewItem(String id) {
+        view.startFormAcrivity(id);
+    }
+
 }

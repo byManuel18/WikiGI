@@ -11,18 +11,31 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CharacterEntity {
-
+    private String id;
     private String name;
     private LocalDate create_date;
     private String constellation;
+    private String tier;
+    private String weapon;
+    private String element;
+    private String rol;
     private int hp;
     private int atk;
     private int def;
     private double rating;
+    private String image="";
 
 
     public CharacterEntity() {
 
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -203,5 +216,45 @@ public class CharacterEntity {
 
     public void setRating(double rating) {
         this.rating = rating;
+    }
+
+    public String getTier() {
+        return tier;
+    }
+
+    public void setTier(String tier) {
+        this.tier = tier;
+    }
+
+    public String getWeapon() {
+        return weapon;
+    }
+
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
+    }
+
+    public String getElement() {
+        return element;
+    }
+
+    public void setElement(String element) {
+        this.element = element;
+    }
+
+    public String getRol() {
+        return rol;
+    }
+
+    public void setRol(String rol) {
+        this.rol = rol;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

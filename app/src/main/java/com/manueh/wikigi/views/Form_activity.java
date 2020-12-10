@@ -1,9 +1,12 @@
 package com.manueh.wikigi.views;
 
+import android.Manifest;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.pm.PackageManager;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -11,6 +14,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.constraintlayout.widget.ConstraintLayout;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -26,9 +32,11 @@ import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 import com.manueh.wikigi.R;
+import com.manueh.wikigi.enums.Codes_Permisions;
 import com.manueh.wikigi.enums.Fields_to_validate;
 import com.manueh.wikigi.interfaces.IFormInterface;
 import com.manueh.wikigi.models.CharacterEntity;
@@ -69,6 +77,9 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private ImageView imagetier;
     private ImageView imagerol;
     private Button save;
+    private ImageView img_galery;
+    private String id;
+    private ConstraintLayout constraintLayoutFormActivity;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -82,7 +93,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         Year = calendar.get(Calendar.YEAR) ;
         Month = calendar.get(Calendar.MONTH);
         Day = calendar.get(Calendar.DAY_OF_MONTH);
-
+        id=getIntent().getStringExtra("id");
         Log.d(TAG,"Creación de la ToolBar");
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -97,6 +108,35 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 fpresenter.ReturnToList();
             }
         });
+        constraintLayoutFormActivity=findViewById(R.id.constraintLayout_form);
+        img_galery=findViewById(R.id.image_galery);
+        img_galery.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.READ_EXTERNAL_STORAGE);
+                Log.d(TAG, "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
+
+                if (WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED) {
+                    // Permiso denegado
+                    // A partir de Marshmallow (6.0) se pide aceptar o rechazar el permiso en tiempo de ejecución
+                    // En las versiones anteriores no es posible hacerlo
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+                        ActivityCompat.requestPermissions(Form_activity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, Codes_Permisions.CODE_WRITE_EXTERNAL_STORAGE_PERMISSION.getCode());
+                        // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+                        // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+                    } else {
+                        Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
+                                .show();
+                    }
+                } else {
+                    // Permiso aceptado
+                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
+                            .show();
+                }
+
+            }
+        });
+
         character=new CharacterEntity();
         nameET=findViewById(R.id.name_form);
         nameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -554,12 +594,41 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
+        if(id!=null){
+            //Recupero info
+            nameET.setText(id);
+        }
+
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+
+        switch (requestCode) {
+            case   123:
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    // Permiso aceptado
+                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
+                            .show();
+                } else {
+                    // Permiso rechazado
+                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
+                            .show();
+                }
+                break;
+            default:
+                super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        }
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_form, menu);
+        if(this.id==null){
+            MenuItem item = menu.findItem(R.id.action_delete);
+            item.setVisible(false);
+        }
+
         return true;
     }
 
@@ -596,6 +665,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
         }
         return super.onOptionsItemSelected(item);
+
     }
 
     @Override

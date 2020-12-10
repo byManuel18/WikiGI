@@ -86,6 +86,7 @@
     <string name="search_byName">Name</string>
     <string name="search_byDate">Create Date</string>
     <string name="error_search">You must select some method</string>
-
+    <string name="write_permission_granted">Permision Acepted</string>
+    <string name="write_permission_denied">Permision Denied</string>
 
 </resources>
