@@ -257,4 +257,23 @@ public class CharacterEntity {
     public void setImage(String image) {
         this.image = image;
     }
+
+    @Override
+    public String toString() {
+        return "CharacterEntity{" +
+                "id='" + id + '\'' +
+                ", name='" + name + '\'' +
+                ", create_date=" + create_date +
+                ", constellation='" + constellation + '\'' +
+                ", tier='" + tier + '\'' +
+                ", weapon='" + weapon + '\'' +
+                ", element='" + element + '\'' +
+                ", rol='" + rol + '\'' +
+                ", hp=" + hp +
+                ", atk=" + atk +
+                ", def=" + def +
+                ", rating=" + rating +
+                '\'' +
+                '}';
+    }
 }
