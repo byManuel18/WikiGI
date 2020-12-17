@@ -74,7 +74,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
             textView_atk.setText(Integer.toString(item.getAtk()));
             textView_hp.setText(Integer.toString(item.getHp()));
             ratingBar_rate.setRating((float)item.getRating());
-            ratingBar_rate.setEnabled(false);
+            ratingBar_rate.setIsIndicator(true);
         }
     }
 

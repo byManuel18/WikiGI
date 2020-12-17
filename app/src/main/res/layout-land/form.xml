@@ -156,6 +156,7 @@
 
             <RatingBar
                 android:id="@+id/ratingBar4"
+                android:theme="@style/RatingBar.Yellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="32dp"
