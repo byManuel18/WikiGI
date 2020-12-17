@@ -1,12 +1,18 @@
 package com.manueh.wikigi.views;
 
 import android.Manifest;
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.Drawable;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -43,6 +49,8 @@ import com.manueh.wikigi.models.CharacterEntity;
 import com.manueh.wikigi.presenters.FormPresenter;
 import com.manueh.wikigi.presenters.ListPresenter;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashSet;
@@ -79,7 +87,9 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private Button save;
     private ImageView img_galery;
     private String id;
+    private ImageView image_remuve;
     private ConstraintLayout constraintLayoutFormActivity;
+    private static final int REQUEST_SELECT_IMAGE = 201;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -113,26 +123,8 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         img_galery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int WriteExternalStoragePermission = ContextCompat.checkSelfPermission(myContext, Manifest.permission.READ_EXTERNAL_STORAGE);
-                Log.d(TAG, "WRITE_EXTERNAL_STORAGE Permission: " + WriteExternalStoragePermission);
-
-                if (WriteExternalStoragePermission != PackageManager.PERMISSION_GRANTED) {
-                    // Permiso denegado
-                    // A partir de Marshmallow (6.0) se pide aceptar o rechazar el permiso en tiempo de ejecución
-                    // En las versiones anteriores no es posible hacerlo
-                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
-                        ActivityCompat.requestPermissions(Form_activity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, Codes_Permisions.CODE_WRITE_EXTERNAL_STORAGE_PERMISSION.getCode());
-                        // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
-                        // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
-                    } else {
-                        Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
-                                .show();
-                    }
-                } else {
-                    // Permiso aceptado
-                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
-                            .show();
-                }
+                Log.d(TAG,"Permisos");
+                fpresenter.WriteExternalStoragePermission();
 
             }
         });
@@ -570,6 +562,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                         .show();
             }
         });
+        image_remuve=findViewById(R.id.image_remuve);
         Button clear_form=findViewById(R.id.clear_button);
         clear_form.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -591,6 +584,16 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 spinner_rol.setSelection(0);
                 spinner_tier.setSelection(0);
                 spinner_weapons.setSelection(0);
+                img_galery.setImageBitmap(null);
+                img_galery.setBackground(ContextCompat.getDrawable(myContext,R.drawable.ic_menu_camera));
+            }
+        });
+
+        image_remuve.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                img_galery.setImageBitmap(null);
+                img_galery.setBackground(ContextCompat.getDrawable(myContext,R.drawable.ic_menu_camera)); //@android:drawable/ic_menu_camera
             }
         });
 
@@ -607,12 +610,10 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             case   123:
                 if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     // Permiso aceptado
-                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
-                            .show();
+                    fpresenter.PermisionsAcepted();
                 } else {
                     // Permiso rechazado
-                    Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
-                            .show();
+                    fpresenter.PermisionDenied();
                 }
                 break;
             default:
@@ -706,5 +707,85 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     @Override
     public void CloseActivity() {
         finish();
+    }
+
+    @Override
+    public void PermissionsDenied() {
+        Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_denied), Snackbar.LENGTH_LONG)
+                .show();
+    }
+
+    @Override
+    public void PermissionsGranted() {
+        // Permiso aceptado
+        Snackbar.make(constraintLayoutFormActivity, getResources().getString(R.string.write_permission_granted), Snackbar.LENGTH_LONG)
+                .show();
+        fpresenter.ShowGalery();
+    }
+
+    @Override
+    public void RequestPermissions() {
+        ActivityCompat.requestPermissions(Form_activity.this, new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE}, Codes_Permisions.CODE_WRITE_EXTERNAL_STORAGE_PERMISSION.getCode());
+        // Una vez que se pide aceptar o rechazar el permiso se ejecuta el método "onRequestPermissionsResult" para manejar la respuesta
+        // Si el usuario marca "No preguntar más" no se volverá a mostrar este diálogo
+    }
+    @Override
+    public void SelectPicture(){
+        // Se le pide al sistema una imagen del dispositivo
+        Intent intent = new Intent();
+        intent.setType("image/*");
+        intent.setAction(Intent.ACTION_GET_CONTENT);
+        startActivityForResult(
+                Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
+                REQUEST_SELECT_IMAGE);
+    }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        switch (requestCode) {
+        /*
+            case (REQUEST_CAPTURE_IMAGE):
+                if(resultCode == Activity.RESULT_OK){
+                    // Se carga la imagen desde un objeto URI al imageView
+                    ImageView imageView = findViewById(R.id.imageView);
+                    imageView.setImageURI(uri);
+
+                    // Se le envía un broadcast a la Galería para que se actualice
+                    Intent mediaScanIntent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
+                    mediaScanIntent.setData(uri);
+                    sendBroadcast(mediaScanIntent);
+                } else if (resultCode == Activity.RESULT_CANCELED) {
+                    // Se borra el archivo temporal
+                    File file = new File(uri.getPath());
+                    file.delete();
+                }
+                break; */
+
+            case (REQUEST_SELECT_IMAGE):
+                if (resultCode == Activity.RESULT_OK) {
+                    // Se carga la imagen desde un objeto Bitmap
+                    Uri selectedImage = data.getData();
+                    String selectedPath = selectedImage.getPath();
+
+                    if (selectedPath != null) {
+                        // Se leen los bytes de la imagen
+                        InputStream imageStream = null;
+                        try {
+                            imageStream = getContentResolver().openInputStream(selectedImage);
+                        } catch (FileNotFoundException e) {
+                            e.printStackTrace();
+                        }
+
+                        // Se transformam los bytes de la imagen a un Bitmap
+                        Bitmap bmp = BitmapFactory.decodeStream(imageStream);
+
+                        // Se carga el Bitmap en el ImageView
+                        ImageView imageView = findViewById(R.id.image_galery);
+                        imageView.setImageBitmap(bmp);
+                        imageView.setBackground(null);
+                    }
+                }
+                break;
+        }
     }
 }

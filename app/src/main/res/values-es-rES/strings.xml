@@ -56,4 +56,5 @@
     <string name="error_search">Debe seleccionar algún metodo</string>
     <string name="write_permission_granted">Permisos Aceptados</string>
     <string name="write_permission_denied">Permisos Denegados</string>
+    <string name="choose_picture">Elige Imagen</string>
 </resources>

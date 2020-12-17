@@ -8,12 +8,20 @@ public interface IFormInterface {
     public interface View {
         void GoBackToList();
         void CloseActivity();
+        void PermissionsDenied();
+        void PermissionsGranted();
+        void RequestPermissions();
+        void SelectPicture();
 
     }
 
     public interface Presenter {
         void ReturnToList();
         void CloseFormActivity();
+        void WriteExternalStoragePermission();
+        void PermisionsAcepted();
+        void PermisionDenied();
+        void ShowGalery();
     }
 
 }

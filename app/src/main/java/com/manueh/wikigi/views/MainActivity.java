@@ -70,7 +70,6 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         uno.setRating(3.5);
         uno.setWeapon("Espada");
 
-
         items.add(uno);
 
         final RecyclerView recyclerView = (RecyclerView) findViewById(R.id.recycleViewListCharacter);

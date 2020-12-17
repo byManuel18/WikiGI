@@ -70,9 +70,9 @@
 
             <ImageView
                 android:id="@+id/image_galery"
-                android:layout_width="103dp"
-                android:layout_height="127dp"
-                android:layout_marginTop="4dp"
+                android:layout_width="128dp"
+                android:layout_height="105dp"
+                android:layout_marginTop="20dp"
                 android:background="@android:drawable/ic_menu_camera"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -212,6 +212,7 @@
                 android:id="@+id/imageView9"
                 android:layout_width="35dp"
                 android:layout_height="32dp"
+                android:layout_marginTop="15dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/image_galery"
@@ -289,10 +290,12 @@
                 app:srcCompat="@drawable/date" />
 
             <ImageView
-                android:id="@+id/imageView15"
+                android:id="@+id/image_remuve"
                 android:layout_width="35dp"
                 android:layout_height="32dp"
+                android:layout_marginStart="15dp"
                 android:layout_marginTop="32dp"
+                android:layout_marginEnd="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.008"
                 app:layout_constraintStart_toEndOf="@+id/image_galery"

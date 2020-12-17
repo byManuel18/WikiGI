@@ -24,17 +24,17 @@
 
             <ImageView
                 android:id="@+id/image_galery"
-                android:layout_width="106dp"
-                android:layout_height="125dp"
-                android:layout_marginTop="80dp"
+                android:layout_width="148dp"
+                android:layout_height="130dp"
+                android:layout_marginTop="84dp"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.08"
+                app:layout_constraintHorizontal_bias="0.061"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@android:drawable/ic_menu_camera" />
 
             <ImageView
-                android:id="@+id/imageView17"
+                android:id="@+id/image_remuve"
                 android:layout_width="56dp"
                 android:layout_height="49dp"
                 android:layout_marginStart="36dp"

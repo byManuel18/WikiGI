@@ -88,5 +88,5 @@
     <string name="error_search">You must select some method</string>
     <string name="write_permission_granted">Permision Acepted</string>
     <string name="write_permission_denied">Permision Denied</string>
-
+    <string name="choose_picture">Choose Picture</string>
 </resources>
