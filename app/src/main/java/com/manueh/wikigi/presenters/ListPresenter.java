@@ -32,4 +32,9 @@ public class ListPresenter implements IListInterface.Presenter {
         view.startFormAcrivity(id);
     }
 
+    @Override
+    public void CharacterDeleted() {
+        view.MessageCharacterDeleted();
+    }
+
 }

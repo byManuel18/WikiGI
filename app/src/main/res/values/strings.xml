@@ -89,4 +89,7 @@
     <string name="write_permission_granted">Permision Acepted</string>
     <string name="write_permission_denied">Permision Denied</string>
     <string name="choose_picture">Choose Picture</string>
+    <string name="undo">Undo?</string>
+    <string name="deletedforlist">Deleted</string>
+    <string name="ratingbar_error">RatingBar out of range</string>
 </resources>

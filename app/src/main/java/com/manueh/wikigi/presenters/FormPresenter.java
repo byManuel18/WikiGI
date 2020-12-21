@@ -13,6 +13,8 @@ import com.manueh.wikigi.R;
 import com.manueh.wikigi.enums.Codes_Permisions;
 import com.manueh.wikigi.enums.Fields_to_validate;
 import com.manueh.wikigi.interfaces.IFormInterface;
+import com.manueh.wikigi.models.CharacterEntity;
+import com.manueh.wikigi.models.CharacterModle;
 import com.manueh.wikigi.views.Form_activity;
 import com.manueh.wikigi.views.MyApplication;
 
@@ -20,9 +22,11 @@ public class FormPresenter implements IFormInterface.Presenter {
 
     private IFormInterface.View view;
     private static String TAG="Formpresenter";
+    private CharacterModle charactermodle;
 
     public FormPresenter(IFormInterface.View view) {
         this.view = view;
+        this.charactermodle=new CharacterModle();
     }
 
     public static String getError(int error_code, Fields_to_validate ftv) {
@@ -121,6 +125,19 @@ public class FormPresenter implements IFormInterface.Presenter {
                         ch = MyApplication.getContext().getResources().getString(R.string.name_error_default);
                 }
                 break;
+            case RATING_FORM:
+                switch (error_code){
+                    case 0:
+                        ch=null;
+                        break;
+                    case 1:
+                        ch=MyApplication.getContext().getResources().getString(R.string.ratingbar_error);
+                        break;
+                    default:
+                        ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
+                }
+                break;
+
 
         }
 
@@ -171,5 +188,14 @@ public class FormPresenter implements IFormInterface.Presenter {
     @Override
     public void ShowGalery() {
         view.SelectPicture();
+    }
+
+    @Override
+    public void onClickSaveButton(CharacterEntity cn) {
+        if(charactermodle.insert(cn)){
+            view.CloseActivity();
+        }else{
+            //error
+        }
     }
 }

@@ -57,4 +57,7 @@
     <string name="write_permission_granted">Permisos Aceptados</string>
     <string name="write_permission_denied">Permisos Denegados</string>
     <string name="choose_picture">Elige Imagen</string>
+    <string name="undo">¿Deshacer?</string>
+    <string name="deletedforlist">Eiminado</string>
+    <string name="ratingbar_error">RatingBar fuera de Rango</string>
 </resources>

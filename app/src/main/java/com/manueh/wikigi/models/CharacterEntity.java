@@ -4,13 +4,21 @@ import android.os.Build;
 
 import androidx.annotation.RequiresApi;
 
+import com.manueh.wikigi.R;
+import com.manueh.wikigi.views.MyApplication;
+
 import java.sql.DatabaseMetaData;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-public class CharacterEntity {
+import io.realm.RealmObject;
+import io.realm.annotations.PrimaryKey;
+
+public class CharacterEntity extends RealmObject {
+
+    @PrimaryKey
     private String id;
     private String name;
     private LocalDate create_date;
@@ -23,6 +31,8 @@ public class CharacterEntity {
     private int atk;
     private int def;
     private double rating;
+
+
     private String image="";
 
 
@@ -214,40 +224,79 @@ public class CharacterEntity {
         return rating;
     }
 
-    public void setRating(double rating) {
-        this.rating = rating;
+    public int setRating(double rating) {
+        int error=0;
+        if(rating<0||rating>5){
+            error=1;
+        }else{
+            this.rating = rating;
+        }
+        return error;
     }
 
     public String getTier() {
         return tier;
     }
 
-    public void setTier(String tier) {
-        this.tier = tier;
+    public int setTier(String tier) {
+        int error=0;
+            if(tier==null){
+                error=1;
+            }else if(tier.equals(MyApplication.getContext().getString(R.string.spinner_tier_title))){
+                error=2;
+            }else{
+                this.tier = tier;
+            }
+        return error;
     }
 
     public String getWeapon() {
         return weapon;
     }
 
-    public void setWeapon(String weapon) {
-        this.weapon = weapon;
+    public int setWeapon(String weapon){
+        int error=0;
+        if(weapon==null){
+            error=1;
+        }else if(weapon.equals(MyApplication.getContext().getString(R.string.spinner_title))){
+            error=2;
+        }else{
+            this.weapon = weapon;
+        }
+        return error;
     }
+
 
     public String getElement() {
         return element;
     }
 
-    public void setElement(String element) {
-        this.element = element;
+    public int setElement(String element) {
+        int error=0;
+        if(element==null){
+            error=1;
+        }else if(element.equals(MyApplication.getContext().getString(R.string.spinner_elements))){
+            error=2;
+        }else{
+            this.element = element;
+        }
+        return error;
     }
 
     public String getRol() {
         return rol;
     }
 
-    public void setRol(String rol) {
-        this.rol = rol;
+    public int setRol(String rol) {
+        int error=0;
+        if(rol==null){
+            error=1;
+        }else if(rol.equals(MyApplication.getContext().getString(R.string.spinner_rol_title))){
+            error=2;
+        }else{
+            this.rol = rol;
+        }
+        return error;
     }
 
     public String getImage() {

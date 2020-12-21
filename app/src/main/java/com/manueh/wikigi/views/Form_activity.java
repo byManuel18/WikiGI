@@ -35,6 +35,7 @@ import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.RatingBar;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -89,6 +90,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private String id;
     private ImageView image_remuve;
     private ConstraintLayout constraintLayoutFormActivity;
+    private RatingBar rtform;
     private static final int REQUEST_SELECT_IMAGE = 201;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -128,7 +130,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
             }
         });
-
+        rtform=findViewById(R.id.rtform);
         character=new CharacterEntity();
         nameET=findViewById(R.id.name_form);
         nameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
@@ -222,6 +224,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 alertdelete.setMessage(MyApplication.getContext().getResources().getString(R.string.title_alert_save));
 
                 alertdelete.setPositiveButton(MyApplication.getContext().getResources().getString(R.string.title_alert_save_acept), new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         Log.d(TAG,"Yes button clicked");
@@ -229,7 +232,75 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_save_acept_done), Toast.LENGTH_LONG);
 
                         toast1.show();
-                        fpresenter.CloseFormActivity();
+                        boolean allcorrect=true;
+                        CharacterEntity newCharacter=new CharacterEntity();
+                        /*
+                            Meterle todo y mostrar que esté bien
+                            Si tienen errores no hacer nada
+                         */
+                        int ne=newCharacter.setName(nameET.getText().toString());
+                        if(ne==0){
+                            nameET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            nameET.setError(FormPresenter.getError(ne,Fields_to_validate.NAME_FORM));
+                        }
+
+                        ne=newCharacter.setCreate_date(dateformET.getText().toString());
+                        if(ne==0){
+                            dateformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            dateformET.setError(FormPresenter.getError(ne,Fields_to_validate.DATE_FORM));
+                        }
+
+                        ne=newCharacter.setConstellation(constellationformET.getText().toString());
+                        if(ne==0){
+                            constellationformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            constellationformET.setError(FormPresenter.getError(ne,Fields_to_validate.CONSTELLATION_FORM));
+                        }
+
+                        ne=newCharacter.setAtk(atkformET.getText().toString());
+                        if(ne==0){
+                            atkformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            atkformET.setError(FormPresenter.getError(ne,Fields_to_validate.ATK_FORM));
+                        }
+
+                        ne=newCharacter.setDef(defET.getText().toString());
+                        if(ne==0){
+                            defET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            defET.setError(FormPresenter.getError(ne,Fields_to_validate.DEF_FORM));
+                        }
+
+                        ne=newCharacter.setHp(hpformET.getText().toString());
+                        if(ne==0){
+                            hpformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            hpformET.setError(FormPresenter.getError(ne,Fields_to_validate.HP_FORM));
+                        }
+
+                        ne=newCharacter.setRating(rtform.getRating());
+                        if(ne==0){
+
+                        }else{
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.RATING_FORM), Toast.LENGTH_SHORT);
+                        }
+
+
+
+                        if(allcorrect){
+                            fpresenter.onClickSaveButton(newCharacter);
+                        }
+
                     }
                 });
 

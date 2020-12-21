@@ -8,5 +8,9 @@ public enum Fields_to_validate {
     ATK_FORM,
     DEF_FORM,
     RATING_FORM,
+    TIER_FORM,
+    ROL_FORM,
+    WEAPON_FORM,
+    ELEMENT_FORM,
 
 }

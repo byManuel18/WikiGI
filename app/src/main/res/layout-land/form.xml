@@ -155,7 +155,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/image_galery" />
 
             <RatingBar
-                android:id="@+id/ratingBar4"
+                android:id="@+id/rtform"
                 android:theme="@style/RatingBar.Yellow"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

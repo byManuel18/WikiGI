@@ -8,6 +8,7 @@ public interface IListInterface {
         void startFormAcrivity(String id);
         void startAboutActivity();
         void startSearchActivity();
+        void MessageCharacterDeleted();
     }
 
     public interface Presenter {
@@ -15,5 +16,6 @@ public interface IListInterface {
         void onClickAbout();
         void OnClickSearch();
         void OnClickRecyclerViewItem(String id);
+        void CharacterDeleted();
     }
 }
