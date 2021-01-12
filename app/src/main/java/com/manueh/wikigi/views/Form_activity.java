@@ -3,6 +3,7 @@ package com.manueh.wikigi.views;
 import android.Manifest;
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.AppComponentFactory;
 import android.app.DatePickerDialog;
 import android.content.ClipData;
 import android.content.Context;
@@ -11,6 +12,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -24,6 +26,7 @@ import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
+import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -37,6 +40,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.Toast;
 
 import com.google.android.material.snackbar.Snackbar;
@@ -50,6 +54,9 @@ import com.manueh.wikigi.models.CharacterEntity;
 import com.manueh.wikigi.presenters.FormPresenter;
 import com.manueh.wikigi.presenters.ListPresenter;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -92,6 +99,8 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private ConstraintLayout constraintLayoutFormActivity;
     private RatingBar rtform;
     private static final int REQUEST_SELECT_IMAGE = 201;
+    private Switch switch_equip;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -130,6 +139,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
             }
         });
+        switch_equip=findViewById(R.id.switch_equip);
         rtform=findViewById(R.id.rtform);
         character=new CharacterEntity();
         nameET=findViewById(R.id.name_form);
@@ -215,104 +225,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
-        Button save=findViewById(R.id.save_button);
-        save.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                AlertDialog.Builder alertdelete = new AlertDialog.Builder(Form_activity.this);
-                // alertdelete.setTitle(MyApplication.getContext().getResources().getString(R.string.button_delete));
-                alertdelete.setMessage(MyApplication.getContext().getResources().getString(R.string.title_alert_save));
 
-                alertdelete.setPositiveButton(MyApplication.getContext().getResources().getString(R.string.title_alert_save_acept), new DialogInterface.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.O)
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG,"Yes button clicked");
-                        Toast toast1 =
-                                Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_save_acept_done), Toast.LENGTH_LONG);
-
-                        toast1.show();
-                        boolean allcorrect=true;
-                        CharacterEntity newCharacter=new CharacterEntity();
-                        /*
-                            Meterle todo y mostrar que esté bien
-                            Si tienen errores no hacer nada
-                         */
-                        int ne=newCharacter.setName(nameET.getText().toString());
-                        if(ne==0){
-                            nameET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            nameET.setError(FormPresenter.getError(ne,Fields_to_validate.NAME_FORM));
-                        }
-
-                        ne=newCharacter.setCreate_date(dateformET.getText().toString());
-                        if(ne==0){
-                            dateformET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            dateformET.setError(FormPresenter.getError(ne,Fields_to_validate.DATE_FORM));
-                        }
-
-                        ne=newCharacter.setConstellation(constellationformET.getText().toString());
-                        if(ne==0){
-                            constellationformET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            constellationformET.setError(FormPresenter.getError(ne,Fields_to_validate.CONSTELLATION_FORM));
-                        }
-
-                        ne=newCharacter.setAtk(atkformET.getText().toString());
-                        if(ne==0){
-                            atkformET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            atkformET.setError(FormPresenter.getError(ne,Fields_to_validate.ATK_FORM));
-                        }
-
-                        ne=newCharacter.setDef(defET.getText().toString());
-                        if(ne==0){
-                            defET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            defET.setError(FormPresenter.getError(ne,Fields_to_validate.DEF_FORM));
-                        }
-
-                        ne=newCharacter.setHp(hpformET.getText().toString());
-                        if(ne==0){
-                            hpformET.setError(null);
-                        }else{
-                            allcorrect=false;
-                            hpformET.setError(FormPresenter.getError(ne,Fields_to_validate.HP_FORM));
-                        }
-
-                        ne=newCharacter.setRating(rtform.getRating());
-                        if(ne==0){
-
-                        }else{
-                            allcorrect=false;
-                            Toast toast =
-                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.RATING_FORM), Toast.LENGTH_SHORT);
-                        }
-
-
-
-                        if(allcorrect){
-                            fpresenter.onClickSaveButton(newCharacter);
-                        }
-
-                    }
-                });
-
-                alertdelete.setNegativeButton(MyApplication.getContext().getResources().getString(R.string.spinner_cancel), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        Log.d(TAG, "No button clicked");
-                        dialog.dismiss();
-                    }
-                }).create().show();
-            }
-        });
 
 
 
@@ -327,7 +240,22 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                     @Override
                     public void onDateSet(DatePicker view, int year, int month, int day) {
                         // Asignar la fecha a un campo de texto
-                        dateformET.setText(String.valueOf(year) + "/" + String.valueOf(month+1) + "/" + String.valueOf(day));
+                        String day_=null;
+                        String month_=null;
+                        String year_=null;
+                        month++;
+                        year_=Integer.toString(year);
+                        if(day>9){
+                            day_=Integer.toString(day);
+                        }else{
+                            day_="0"+day;
+                        }
+                        if(month>9){
+                            month_=Integer.toString(month);
+                        }else{
+                            month_="0"+month;
+                        }
+                        dateformET.setText(day_+ "/" + month_+ "/" + year_);
                     }
                 },Year, Month, Day);
                 // Mostrar el calendario
@@ -668,6 +596,154 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
+        Button save=findViewById(R.id.save_button);
+        save.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertDialog.Builder alertdelete = new AlertDialog.Builder(Form_activity.this);
+                // alertdelete.setTitle(MyApplication.getContext().getResources().getString(R.string.button_delete));
+                alertdelete.setMessage(MyApplication.getContext().getResources().getString(R.string.title_alert_save));
+
+                alertdelete.setPositiveButton(MyApplication.getContext().getResources().getString(R.string.title_alert_save_acept), new DialogInterface.OnClickListener() {
+                    @RequiresApi(api = Build.VERSION_CODES.O)
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG,"Yes button clicked");
+                       /* Toast toast1 =
+                                Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_save_acept_done), Toast.LENGTH_LONG);
+
+                        toast1.show();*/
+                        boolean allcorrect=true;
+                        CharacterEntity newCharacter=new CharacterEntity();
+
+                            //Meterle todo y mostrar que esté bien
+                            //Si tienen errores no hacer nada
+
+                        int ne=newCharacter.setName(nameET.getText().toString());
+                        if(ne==0){
+                            nameET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            nameET.setError(FormPresenter.getError(ne,Fields_to_validate.NAME_FORM));
+                        }
+
+                        ne=newCharacter.setCreate_date(dateformET.getText().toString());
+                        Log.d(TAG, ne+" Error  "+dateformET.getText().toString());
+                        if(ne==0){
+                            dateformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            dateformET.setError(FormPresenter.getError(ne,Fields_to_validate.DATE_FORM));
+                        }
+
+                        ne=newCharacter.setConstellation(constellationformET.getText().toString());
+                        if(ne==0){
+                            constellationformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            constellationformET.setError(FormPresenter.getError(ne,Fields_to_validate.CONSTELLATION_FORM));
+                        }
+
+                        ne=newCharacter.setAtk(atkformET.getText().toString());
+                        if(ne==0){
+                            atkformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            atkformET.setError(FormPresenter.getError(ne,Fields_to_validate.ATK_FORM));
+                        }
+
+                        ne=newCharacter.setDef(defET.getText().toString());
+                        if(ne==0){
+                            defET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            defET.setError(FormPresenter.getError(ne,Fields_to_validate.DEF_FORM));
+                        }
+
+                        ne=newCharacter.setHp(hpformET.getText().toString());
+                        if(ne==0){
+                            hpformET.setError(null);
+                        }else{
+                            allcorrect=false;
+                            hpformET.setError(FormPresenter.getError(ne,Fields_to_validate.HP_FORM));
+                        }
+
+                        ne=newCharacter.setRating(rtform.getRating());
+                        if(ne==0){
+
+                        }else{
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.RATING_FORM), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+                        ne=newCharacter.setElement(spinner_element.getSelectedItem().toString());
+                        if(ne!=0){
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.ELEMENT_FORM), Toast.LENGTH_SHORT);
+                            toast.show();
+
+                        }
+                        ne=newCharacter.setRol(spinner_rol.getSelectedItem().toString());
+                        if(ne!=0){
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.ROL_FORM), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        ne=newCharacter.setWeapon(spinner_weapons.getSelectedItem().toString());
+                        if(ne!=0){
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.WEAPON_FORM), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        ne=newCharacter.setTier(spinner_tier.getSelectedItem().toString());
+                        if(ne!=0){
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),FormPresenter.getError(ne,Fields_to_validate.TIER_FORM), Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+                        newCharacter.setEquip(switch_equip.isChecked());
+                        //Log.d(TAG, pathphotogalery);
+                        Bitmap bitmap = ((BitmapDrawable) img_galery.getDrawable()).getBitmap();
+                        if(bitmap!=null){
+                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                            byte[] byteArray = byteArrayOutputStream.toByteArray();
+                            String fotoEnBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                            newCharacter.setImage(fotoEnBase64);
+                        }else{
+                            allcorrect=false;
+                            Toast toast =
+                                    Toast.makeText(getApplicationContext(),R.string.imagengalery_error_novalue, Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+
+
+                        if(allcorrect){
+                            fpresenter.onClickSaveButton(newCharacter);
+                            //Log.d(TAG, newCharacter.toString());
+                            //fpresenter.CloseFormActivity();
+                        }
+
+                    }
+                });
+
+                alertdelete.setNegativeButton(MyApplication.getContext().getResources().getString(R.string.spinner_cancel), new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Log.d(TAG, "No button clicked");
+                        dialog.dismiss();
+                    }
+                }).create().show();
+            }
+        });
+
         if(id!=null){
             //Recupero info
             nameET.setText(id);
@@ -810,6 +886,19 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 Intent.createChooser(intent, getResources().getString(R.string.choose_picture)),
                 REQUEST_SELECT_IMAGE);
     }
+
+    @Override
+    public void CharacterSaved() {
+        Toast toast =
+                Toast.makeText(getApplicationContext(),R.string.title_alert_save_acept_done, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void NoCharacterSaved() {
+        Toast toast =
+                Toast.makeText(getApplicationContext(),R.string.title_alert_save_acept_done, Toast.LENGTH_SHORT);
+    }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -837,7 +926,6 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                     // Se carga la imagen desde un objeto Bitmap
                     Uri selectedImage = data.getData();
                     String selectedPath = selectedImage.getPath();
-
                     if (selectedPath != null) {
                         // Se leen los bytes de la imagen
                         InputStream imageStream = null;

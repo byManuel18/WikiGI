@@ -13,6 +13,8 @@ public interface IFormInterface {
         void PermissionsGranted();
         void RequestPermissions();
         void SelectPicture();
+        void CharacterSaved();
+        void NoCharacterSaved();
 
     }
 

@@ -137,8 +137,65 @@ public class FormPresenter implements IFormInterface.Presenter {
                         ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
                 }
                 break;
-
-
+            case ELEMENT_FORM:
+                    switch (error_code){
+                        case 0:
+                            ch=null;
+                            break;
+                        case 1:
+                            ch=MyApplication.getContext().getResources().getString(R.string.element_error_null);
+                            break;
+                        case 2:
+                            ch=MyApplication.getContext().getResources().getString(R.string.element_error_novalue);
+                            break;
+                        default:
+                            ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
+                    }
+                break;
+            case ROL_FORM:
+                    switch (error_code){
+                        case 0:
+                            ch=null;
+                            break;
+                        case 1:
+                            ch=MyApplication.getContext().getResources().getString(R.string.rol_error_null);
+                            break;
+                        case 2:
+                            ch=MyApplication.getContext().getResources().getString(R.string.rol_error_novalue);
+                            break;
+                        default:
+                            ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
+                    }
+                break;
+            case TIER_FORM:
+                    switch (error_code){
+                        case 0:
+                            ch=null;
+                            break;
+                        case 1:
+                            ch=MyApplication.getContext().getResources().getString(R.string.tier_error_null);
+                            break;
+                        case 2:
+                            ch=MyApplication.getContext().getResources().getString(R.string.tier_error_novalue);
+                            break;
+                        default:
+                            ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
+                    }
+                break;
+            case WEAPON_FORM:
+                    switch (error_code){
+                        case 0:
+                            ch=null;
+                            break;
+                        case 1:
+                            ch=MyApplication.getContext().getResources().getString(R.string.weapons_error_null);
+                            break;
+                        case 2:
+                            ch=MyApplication.getContext().getResources().getString(R.string.weapons_error_novalue);
+                        default:
+                            ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
+                    }
+                break;
         }
 
         return ch;
@@ -193,9 +250,10 @@ public class FormPresenter implements IFormInterface.Presenter {
     @Override
     public void onClickSaveButton(CharacterEntity cn) {
         if(charactermodle.insert(cn)){
+            view.CharacterSaved();
             view.CloseActivity();
         }else{
-            //error
+            view.NoCharacterSaved();
         }
     }
 }

@@ -60,4 +60,14 @@
     <string name="undo">¿Deshacer?</string>
     <string name="deletedforlist">Eiminado</string>
     <string name="ratingbar_error">RatingBar fuera de Rango</string>
+    <string name="rol_error_null">ROL no puede estar vacío</string>
+    <string name="tier_error_null">TIER no puede estar vacío</string>
+    <string name="element_error_null">ELEMENT no puede estar vacío</string>
+    <string name="weapons_error_null">WEAPONS no puede estra vacío</string>
+    <string name="weapons_error_novalue">Ningún valor elegido para WEAPONS</string>
+    <string name="element_error_novalue">Ningún valor elegido para ELEMENT</string>
+    <string name="tier_error_novalue">Ningún valor elegido para TIER</string>
+    <string name="rol_error_novalue">Ningún valor elegido para ROL</string>
+    <string name="imagengalery_error_novalue">Ningún valor elegido para IMAGEN</string>
+    <string name="error_cant_save">ERROR. Personage no guardado</string>
 </resources>

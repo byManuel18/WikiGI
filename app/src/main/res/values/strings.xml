@@ -92,4 +92,14 @@
     <string name="undo">Undo?</string>
     <string name="deletedforlist">Deleted</string>
     <string name="ratingbar_error">RatingBar out of range</string>
+    <string name="rol_error_null">ROL can´t be void</string>
+    <string name="rol_error_novalue">No value choosen for ROL</string>
+    <string name="tier_error_null">TIER can´t be void</string>
+    <string name="tier_error_novalue">No value choosen for TIER</string>
+    <string name="element_error_null">ELEMENT can´t be void</string>
+    <string name="element_error_novalue">No value choose for ELEMENT</string>
+    <string name="weapons_error_null">WEAPONS can´t be void</string>
+    <string name="weapons_error_novalue">No value choose for WEAPONS</string>
+    <string name="imagengalery_error_novalue">No value choose for IMAGEN</string>
+    <string name="error_cant_save">ERROR. Character no sabed</string>
 </resources>

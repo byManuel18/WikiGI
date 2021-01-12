@@ -260,7 +260,7 @@
                 app:srcCompat="@drawable/defensa" />
 
             <Switch
-                android:id="@+id/switch1"
+                android:id="@+id/switch_equip"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

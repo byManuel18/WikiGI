@@ -8,6 +8,7 @@ import com.manueh.wikigi.R;
 import com.manueh.wikigi.views.MyApplication;
 
 import java.sql.DatabaseMetaData;
+import java.sql.Date;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -21,7 +22,7 @@ public class CharacterEntity extends RealmObject {
     @PrimaryKey
     private String id;
     private String name;
-    private LocalDate create_date;
+    private String create_date;
     private String constellation;
     private String tier;
     private String weapon;
@@ -31,6 +32,7 @@ public class CharacterEntity extends RealmObject {
     private int atk;
     private int def;
     private double rating;
+    private boolean equip;
 
 
     private String image="";
@@ -38,6 +40,14 @@ public class CharacterEntity extends RealmObject {
 
     public CharacterEntity() {
 
+    }
+
+    public boolean isEquip() {
+        return equip;
+    }
+
+    public void setEquip(boolean equip) {
+        this.equip = equip;
     }
 
     public String getId() {
@@ -102,7 +112,7 @@ public class CharacterEntity extends RealmObject {
         return error;
     }
 
-    public LocalDate getCreate_date() {
+    public String getCreate_date() {
         return create_date;
     }
     /*
@@ -117,20 +127,26 @@ public class CharacterEntity extends RealmObject {
     public int setCreate_date(String create_date) {
         int rsult=-1;
         if(create_date!=null&&create_date.length()>0){
-            Pattern pat = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
-            Pattern pat2= Pattern.compile("([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
-            Matcher mat = pat.matcher(create_date);
-            if(mat.matches()){
+            //Pattern pat = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
+            //Pattern pat2= Pattern.compile("([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
+            Pattern pat3=Pattern.compile("^(?:3[01]|[12][0-9]|0?[1-9])([\\-/.])(0?[1-9]|1[1-2])\\1\\d{4}$");
+            //Matcher mat = pat.matcher(create_date);
+            //Matcher mat2=pat2.matcher(create_date);
+            Matcher mat3=pat3.matcher(create_date);
+            //mat.matches()||mat2.matches()
+            if(mat3.matches()){
                 LocalDate datetoadd;
                 try{
-                    datetoadd=LocalDate.parse(create_date);
-                    this.create_date =datetoadd;
+                    DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
+                    datetoadd=LocalDate.parse(create_date,formatters);
+                    this.create_date =datetoadd.toString();
                     rsult=0;
                 }catch (Exception e){
                     try{
-                        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+                        DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         datetoadd=LocalDate.parse(create_date,formatters);
-                        this.create_date =datetoadd;
+                        this.create_date =datetoadd.toString();
+                        rsult=0;
                     }catch (Exception ex){
                         rsult=3;
                     }
@@ -323,6 +339,6 @@ public class CharacterEntity extends RealmObject {
                 ", def=" + def +
                 ", rating=" + rating +
                 '\'' +
-                '}';
+                '}'+this.image;
     }
 }
