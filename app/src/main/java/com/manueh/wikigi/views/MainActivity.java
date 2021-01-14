@@ -30,7 +30,11 @@ import android.view.MenuItem;
 import android.view.Window;
 import android.widget.Toast;
 
+import java.io.File;
 import java.util.ArrayList;
+
+import io.realm.Realm;
+import io.realm.RealmConfiguration;
 
 public class MainActivity extends AppCompatActivity implements IListInterface.View {
     private IListInterface.Presenter presenter;
@@ -52,7 +56,6 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         Log.d(TAG, "Poner barra de abajo en negro");
         this.window = getWindow();
         this.window.setNavigationBarColor(getResources().getColor(R.color.black));
-
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override

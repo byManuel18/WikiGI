@@ -1,5 +1,6 @@
 package com.manueh.wikigi.views;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
@@ -11,6 +12,7 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.manueh.wikigi.R;
@@ -63,6 +65,8 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imageView_character.setImageBitmap(decodedByte);
                 
+            }else{
+                imageView_character.setImageDrawable(ContextCompat.getDrawable(MyApplication.getContext(),R.drawable.ic_menu_camera));
             }
             textView_name.setText(item.getName());
             textView_constelllation.setText(item.getConstellation());

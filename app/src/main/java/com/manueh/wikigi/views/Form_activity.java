@@ -710,19 +710,22 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
                         newCharacter.setEquip(switch_equip.isChecked());
                         //Log.d(TAG, pathphotogalery);
-                        Bitmap bitmap = ((BitmapDrawable) img_galery.getDrawable()).getBitmap();
-                        if(bitmap!=null){
-                            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                            bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
-                            byte[] byteArray = byteArrayOutputStream.toByteArray();
-                            String fotoEnBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
-                            newCharacter.setImage(fotoEnBase64);
-                        }else{
-                            allcorrect=false;
+                        if(img_galery!=null&&img_galery.getDrawable()!=null){
+                            Bitmap bitmap = ((BitmapDrawable) img_galery.getDrawable()).getBitmap();
+                            if(bitmap!=null){
+                                ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+                                bitmap.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+                                byte[] byteArray = byteArrayOutputStream.toByteArray();
+                                String imgEnBase64 = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                                newCharacter.setImage(imgEnBase64);
+                            }else{
+                            /*allcorrect=false;
                             Toast toast =
                                     Toast.makeText(getApplicationContext(),R.string.imagengalery_error_novalue, Toast.LENGTH_SHORT);
-                            toast.show();
+                            toast.show();*/
+                            }
                         }
+
 
 
                         if(allcorrect){
