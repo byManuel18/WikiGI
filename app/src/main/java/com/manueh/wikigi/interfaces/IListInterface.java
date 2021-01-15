@@ -1,6 +1,9 @@
 package com.manueh.wikigi.interfaces;
 
 
+import com.manueh.wikigi.models.CharacterEntity;
+
+import java.util.ArrayList;
 
 public interface IListInterface {
     public interface View {
@@ -17,5 +20,6 @@ public interface IListInterface {
         void OnClickSearch();
         void OnClickRecyclerViewItem(String id);
         void CharacterDeleted();
+        ArrayList<CharacterEntity> getAllItems();
     }
 }

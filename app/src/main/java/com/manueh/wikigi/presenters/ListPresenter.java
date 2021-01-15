@@ -3,7 +3,11 @@ package com.manueh.wikigi.presenters;
 import com.manueh.wikigi.R;
 import com.manueh.wikigi.enums.Fields_to_validate;
 import com.manueh.wikigi.interfaces.IListInterface;
+import com.manueh.wikigi.models.CharacterEntity;
+import com.manueh.wikigi.models.CharacterModle;
 import com.manueh.wikigi.views.MyApplication;
+
+import java.util.ArrayList;
 
 public class ListPresenter implements IListInterface.Presenter {
     private IListInterface.View view;
@@ -35,6 +39,13 @@ public class ListPresenter implements IListInterface.Presenter {
     @Override
     public void CharacterDeleted() {
         view.MessageCharacterDeleted();
+    }
+
+    @Override
+    public ArrayList<CharacterEntity> getAllItems() {
+        CharacterModle data=new CharacterModle();
+
+        return data.getAllItemsToList();
     }
 
 }
