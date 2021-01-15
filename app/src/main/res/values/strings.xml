@@ -65,7 +65,7 @@
     <string name="spinner_rol3">TANK</string>
     <string name="spinner_rol4" translatable="false">DPS</string>
     <string name="action_help">Help</string>
-    <string name="quantity_list_result">X Characters found</string>
+    <string name="quantity_list_result"> Characters found</string>
     <!--  -->
     <string name="developed_name" translatable="false">Manuel Guerrero Trujillo</string>
     <string name="developed_contact" translatable="false">618866651</string>
@@ -89,7 +89,7 @@
     <string name="write_permission_granted">Permision Acepted</string>
     <string name="write_permission_denied">Permision Denied</string>
     <string name="choose_picture">Choose Picture</string>
-    <string name="undo">Undo?</string>
+    <string name="undo">Undo</string>
     <string name="deletedforlist">Deleted</string>
     <string name="ratingbar_error">RatingBar out of range</string>
     <string name="rol_error_null">ROL can´t be void</string>

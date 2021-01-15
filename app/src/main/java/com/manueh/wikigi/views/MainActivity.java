@@ -28,6 +28,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
@@ -43,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     private Window window;
     private CharacterAdapter adaptador;
     private RecyclerView recyclerView;
+    private TextView n_items;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,7 +65,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
                 presenter.onClickAddNewPerson();
             }
         });
-
+        n_items=findViewById(R.id.n_items);
         /*CharacterEntity one = new CharacterEntity();
         one.setName("NOELLE");
         one.setConstellation("PARMA CORDIS");
@@ -312,7 +314,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     @Override
     public void MessageCharacterDeleted() {
         Snackbar.make(recyclerView,R.string.deletedforlist,
-                Snackbar.LENGTH_LONG).setAction(R.string.undo, new View.OnClickListener() {
+                Snackbar.LENGTH_LONG).setAction(getString(R.string.undo)+addagain.getName()+"?", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 items.add(position2,addagain);
@@ -330,6 +332,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     protected void onResume() {
         items.clear();
         items.addAll(presenter.getAllItems());
+        n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
         super.onResume();
 
     }

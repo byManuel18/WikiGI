@@ -40,7 +40,7 @@
     <string name="spinner_rol1">CURADOR</string>
     <string name="action_about">Sobre AppCRUD</string>
     <string name="action_help">Ayuda</string>
-    <string name="quantity_list_result">X Personajes encontrados</string>
+    <string name="quantity_list_result">" Personajes encontrados"</string>
     <string name="title_activity_about_">Sobre el AppCRUD</string>
     <string name="title_alert_delete_">¿Seguro que desea eliminar este personaje?</string>
     <string name="title_alert_delete_acept">Eliminar</string>
@@ -57,7 +57,7 @@
     <string name="write_permission_granted">Permisos Aceptados</string>
     <string name="write_permission_denied">Permisos Denegados</string>
     <string name="choose_picture">Elige Imagen</string>
-    <string name="undo">¿Deshacer?</string>
+    <string name="undo">"¿Deshacer "</string>
     <string name="deletedforlist">Eiminado</string>
     <string name="ratingbar_error">RatingBar fuera de Rango</string>
     <string name="rol_error_null">ROL no puede estar vacío</string>

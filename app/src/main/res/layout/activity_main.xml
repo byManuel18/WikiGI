@@ -25,10 +25,9 @@
             app:titleTextColor="#FF5722" />
 
         <TextView
-            android:id="@+id/textView18"
+            android:id="@+id/n_items"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/quantity_list_result"
             android:textAlignment="center"
             android:textColor="#FF5722" />
 
