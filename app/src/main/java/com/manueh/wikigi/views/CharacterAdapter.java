@@ -60,7 +60,7 @@ public class CharacterAdapter extends RecyclerView.Adapter<CharacterAdapter.Char
         }
 
         public void CharacterBind(CharacterEntity item) {
-            if(item.getImage()!=null){
+            if(item.getImage()!=null&&!item.getImage().equals("")){
                 byte[] decodedString = Base64.decode(item.getImage(), Base64.DEFAULT);
                 Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
                 imageView_character.setImageBitmap(decodedByte);

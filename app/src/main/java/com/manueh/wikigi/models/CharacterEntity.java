@@ -35,11 +35,11 @@ public class CharacterEntity extends RealmObject {
     private boolean equip;
 
 
-    private String image="";
+    private String image;
 
 
     public CharacterEntity() {
-
+        this.image="";
     }
 
     public boolean isEquip() {
