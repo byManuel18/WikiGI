@@ -248,6 +248,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
                 case ItemTouchHelper.LEFT:
                     addagain=items.get(position);
                     items.remove(position);
+                    n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
                     adaptador.notifyItemRemoved(position);
                     presenter.CharacterDeleted();
                     break;
@@ -318,6 +319,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
             @Override
             public void onClick(View v) {
                 items.add(position2,addagain);
+                n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
                 adaptador.notifyItemInserted(position2);
             }
         }).show();
