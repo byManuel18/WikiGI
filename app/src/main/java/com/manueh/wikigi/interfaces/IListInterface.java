@@ -21,5 +21,6 @@ public interface IListInterface {
         void OnClickRecyclerViewItem(String id);
         void CharacterDeleted();
         ArrayList<CharacterEntity> getAllItems();
+        void SetItemsFristTime();
     }
 }

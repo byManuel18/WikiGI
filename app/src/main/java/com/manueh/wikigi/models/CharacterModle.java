@@ -20,7 +20,6 @@ public class CharacterModle {
             allitems.addAll(realm.copyFromRealm(result));
             realm.close();
             for (CharacterEntity c: allitems) {
-                Log.d("RECOGIDA DE DATOS", c.toString());
                 CharacterEntity ir = new CharacterEntity();
                 ir.setImage(c.getImage());
                 ir.setId(c.getId());
