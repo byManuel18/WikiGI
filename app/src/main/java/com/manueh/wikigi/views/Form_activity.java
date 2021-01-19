@@ -100,6 +100,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private RatingBar rtform;
     private static final int REQUEST_SELECT_IMAGE = 201;
     private Switch switch_equip;
+    private CharacterEntity toedit=null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -122,6 +123,22 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_form_activity));
+        save=findViewById(R.id.save_button);
+        img_galery=findViewById(R.id.image_galery);
+        switch_equip=findViewById(R.id.switch_equip);
+        rtform=findViewById(R.id.rtform);
+        nameET=findViewById(R.id.name_form);
+        dateformET=findViewById(R.id.date_textInputEdit);
+        constellationformET=findViewById(R.id.constellation_textinputedit);
+        hpformET=findViewById(R.id.hp_textinputEditText);
+        atkformET=findViewById(R.id.atk_textInputEditText);
+        defET=findViewById(R.id.def_textInputEditText);
+        Spinner spinner_weapons = (Spinner) findViewById(R.id.spinner_arm);
+        Spinner spinner_element = (Spinner) findViewById(R.id.spinner_element);
+        Spinner spinner_tier = (Spinner) findViewById(R.id.spinner_tier);
+        Spinner spinner_rol = (Spinner) findViewById(R.id.spinner_rol);
+        Button clear_form=findViewById(R.id.clear_button);
+
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +147,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
         constraintLayoutFormActivity=findViewById(R.id.constraintLayout_form);
-        img_galery=findViewById(R.id.image_galery);
+
         img_galery.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -139,95 +156,9 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
             }
         });
-        switch_equip=findViewById(R.id.switch_equip);
-        rtform=findViewById(R.id.rtform);
+
+
         character=new CharacterEntity();
-        nameET=findViewById(R.id.name_form);
-        nameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText Name form");
-                    int error_code=character.setName(nameET.getText().toString());
-                    nameET.setError(FormPresenter.getError(error_code, Fields_to_validate.NAME_FORM));
-                }else{
-                    Log.d(TAG,"Input EditText Name form");
-                }
-            }
-        });
-        dateformET=findViewById(R.id.date_textInputEdit);
-        dateformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @RequiresApi(api = Build.VERSION_CODES.O)
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText create date form");
-                    int error_code=character.setCreate_date(dateformET.getText().toString());
-                    dateformET.setError(FormPresenter.getError(error_code,Fields_to_validate.DATE_FORM));
-
-                }else{
-                    Log.d(TAG,"Input EditText create date form");
-                }
-            }
-        });
-        constellationformET=findViewById(R.id.constellation_textinputedit);
-        constellationformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText constellation form");
-                    int error_code=character.setConstellation(constellationformET.getText().toString());
-                    constellationformET.setError(FormPresenter.getError(error_code,Fields_to_validate.CONSTELLATION_FORM));
-                }else{
-                    Log.d(TAG,"Input EditText constellation form");
-                }
-            }
-        });
-        hpformET=findViewById(R.id.hp_textinputEditText);
-        hpformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText hp form");
-                    int err_code=character.setHp(hpformET.getText().toString());
-                    hpformET.setError(FormPresenter.getError(err_code,Fields_to_validate.HP_FORM));
-                }else{
-                    Log.d(TAG,"Input EditText hp form");
-                }
-            }
-        });
-
-        atkformET=findViewById(R.id.atk_textInputEditText);
-        atkformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText atk form");
-                    int err_code=character.setAtk(atkformET.getText().toString());
-                    atkformET.setError(FormPresenter.getError(err_code,Fields_to_validate.ATK_FORM));
-                }else{
-                    Log.d(TAG,"Input EditText atk form");
-                }
-            }
-        });
-
-        defET=findViewById(R.id.def_textInputEditText);
-        defET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
-            @Override
-            public void onFocusChange(View v, boolean hasFocus) {
-                if(!hasFocus){
-                    Log.d(TAG,"Exit EditText def form");
-                    int err_code=character.setDef(defET.getText().toString());
-                    defET.setError(FormPresenter.getError(err_code,Fields_to_validate.DEF_FORM));
-                }else{
-                    Log.d(TAG,"Input EditText def form");
-                }
-            }
-        });
-
-
-
-
 
         imagedate=findViewById(R.id.imagedate);
         imagedate.setOnClickListener(new View.OnClickListener() {
@@ -265,13 +196,14 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
         Log.d(TAG,"Da valores al spiner de armas");
         List<String> list_weapons=new ArrayList<>();
-        Spinner spinner_weapons = (Spinner) findViewById(R.id.spinner_arm);
-        list_weapons.add(getResources().getString(R.string.spinner_title));
+        list_weapons.add(MyApplication.getContext().getString(R.string.spinner_title));
+        /*list_weapons.add(getResources().getString(R.string.spinner_title));
         list_weapons.add(getResources().getString(R.string.spinner_catalyst));
         list_weapons.add(getResources().getString(R.string.spinner_claymore));
         list_weapons.add(getResources().getString(R.string.spinner_spear));
         list_weapons.add(getResources().getString(R.string.spinner_sword));
-        list_weapons.add(getResources().getString(R.string.spinner_bow));
+        list_weapons.add(getResources().getString(R.string.spinner_bow));*/
+        list_weapons.addAll(fpresenter.GetValueSpinner(Fields_to_validate.WEAPON_FORM));
         adapter_weapons=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list_weapons);
         adapter_weapons.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner_weapons.setAdapter(adapter_weapons);
@@ -339,15 +271,17 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
         Log.d(TAG,"Da valores al spiner de elementos");
-        Spinner spinner_element = (Spinner) findViewById(R.id.spinner_element);
+
         List<String> list_elements=new ArrayList<>();
-        list_elements.add(getResources().getString(R.string.spinner_elements));
+        list_elements.addAll(fpresenter.GetValueSpinner(Fields_to_validate.ELEMENT_FORM));
+        list_elements.add(MyApplication.getContext().getString(R.string.spinner_elements));
+        /*list_elements.add(getResources().getString(R.string.spinner_elements));
         list_elements.add(getResources().getString(R.string.spinner_ele1));
         list_elements.add(getResources().getString(R.string.spinner_ele2));
         list_elements.add(getResources().getString(R.string.spinner_ele3));
         list_elements.add(getResources().getString(R.string.spinner_ele4));
         list_elements.add(getResources().getString(R.string.spinner_ele5));
-        list_elements.add(getResources().getString(R.string.spinner_ele6));
+        list_elements.add(getResources().getString(R.string.spinner_ele6));*/
         adapter_elements=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list_elements);
         adapter_elements.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner_element.setAdapter(adapter_elements);
@@ -414,14 +348,16 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
         Log.d(TAG,"Da valores al spiner de tier");
-        Spinner spinner_tier = (Spinner) findViewById(R.id.spinner_tier);
+
         List<String> list_tier=new ArrayList<>();
-        list_tier.add(getResources().getString(R.string.spinner_tier_title));
+        list_tier.addAll(fpresenter.GetValueSpinner(Fields_to_validate.TIER_FORM));
+        list_tier.add(MyApplication.getContext().getString(R.string.spinner_tier_title));
+        /*list_tier.add(getResources().getString(R.string.spinner_tier_title));
         list_tier.add(getResources().getString(R.string.spinner_tiers));
         list_tier.add(getResources().getString(R.string.spinner_tiera));
         list_tier.add(getResources().getString(R.string.spinner_tierb));
         list_tier.add(getResources().getString(R.string.spinner_tierc));
-        list_tier.add(getResources().getString(R.string.spinner_tierd));
+        list_tier.add(getResources().getString(R.string.spinner_tierd));*/
         adapter_tier=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list_tier);
         adapter_tier.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner_tier.setAdapter(adapter_tier);
@@ -489,13 +425,15 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         });
 
         Log.d(TAG,"Da valores al spiner de rol");
-        Spinner spinner_rol = (Spinner) findViewById(R.id.spinner_rol);
+
         List<String> list_rol=new ArrayList<>();
-        list_rol.add(getResources().getString(R.string.spinner_rol_title));
+        list_rol.addAll(fpresenter.GetValueSpinner(Fields_to_validate.ROL_FORM));
+        list_rol.add(MyApplication.getContext().getString(R.string.spinner_rol_title));
+    /*list_rol.add(getResources().getString(R.string.spinner_rol_title));
         list_rol.add(getResources().getString(R.string.spinner_rol1));
         list_rol.add(getResources().getString(R.string.spinner_rol2));
         list_rol.add(getResources().getString(R.string.spinner_rol3));
-        list_rol.add(getResources().getString(R.string.spinner_rol4));
+        list_rol.add(getResources().getString(R.string.spinner_rol4));*/
         adapter_rol=new ArrayAdapter<String>(this, R.layout.support_simple_spinner_dropdown_item, list_rol);
         adapter_rol.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner_rol.setAdapter(adapter_rol);
@@ -562,7 +500,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
         image_remuve=findViewById(R.id.image_remuve);
-        Button clear_form=findViewById(R.id.clear_button);
+
         clear_form.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -588,6 +526,38 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
+        if(id!=null){
+            //Recupero info
+            save.setText("Editar");
+            toedit=fpresenter.GetCharacterbyID(id);
+            if(toedit!=null){
+                nameET.setText(toedit.getName());
+                constellationformET.setText(toedit.getConstellation());
+                //Log.d(TAG, character.toString());
+                atkformET.setText(Integer.toString(toedit.getAtk()));
+                defET.setText(Integer.toString(toedit.getDef()));
+                dateformET.setText(toedit.getCreate_date());
+                hpformET.setText(Integer.toString(toedit.getHp()));
+                switch_equip.setChecked(toedit.isEquip());
+                rtform.setRating((float)toedit.getRating());
+                spinner_rol.setSelection(adapter_rol.getPosition(toedit.getRol()));
+                spinner_element.setSelection(adapter_elements.getPosition(toedit.getElement()));
+                spinner_tier.setSelection(adapter_tier.getPosition(toedit.getTier()));
+                spinner_weapons.setSelection(adapter_weapons.getPosition(toedit.getWeapon()));
+                if(character.getImage()!=null&&!toedit.equals("")) {
+                    byte[] decodedString = Base64.decode(toedit.getImage(), Base64.DEFAULT);
+                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+                    img_galery.setImageBitmap(decodedByte);
+                }
+            }
+
+        }else{
+            spinner_rol.setSelection(adapter_rol.getPosition(MyApplication.getContext().getString(R.string.spinner_rol_title)));
+            spinner_element.setSelection(adapter_elements.getPosition(MyApplication.getContext().getString(R.string.spinner_elements)));
+            spinner_tier.setSelection(adapter_tier.getPosition(MyApplication.getContext().getString(R.string.spinner_tier_title)));
+            spinner_weapons.setSelection(adapter_weapons.getPosition(MyApplication.getContext().getString(R.string.spinner_title)));
+        }
+
         image_remuve.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -596,7 +566,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
-        Button save=findViewById(R.id.save_button);
+
         save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -729,7 +699,13 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
 
                         if(allcorrect){
-                            fpresenter.onClickSaveButton(newCharacter);
+                            if(id==null){
+                                fpresenter.onClickSaveButton(newCharacter);
+                            }else{
+                                newCharacter.setId(toedit.getId());
+                                fpresenter.OnClickEditButton(newCharacter);
+                            }
+
                             //Log.d(TAG, newCharacter.toString());
                             //fpresenter.CloseFormActivity();
                         }
@@ -747,10 +723,88 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }
         });
 
-        if(id!=null){
-            //Recupero info
-            nameET.setText(id);
-        }
+        nameET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText Name form");
+                    int error_code=character.setName(nameET.getText().toString());
+                    nameET.setError(FormPresenter.getError(error_code, Fields_to_validate.NAME_FORM));
+                }else{
+                    Log.d(TAG,"Input EditText Name form");
+                }
+            }
+        });
+
+        dateformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText create date form");
+                    int error_code=character.setCreate_date(dateformET.getText().toString());
+                    dateformET.setError(FormPresenter.getError(error_code,Fields_to_validate.DATE_FORM));
+
+                }else{
+                    Log.d(TAG,"Input EditText create date form");
+                }
+            }
+        });
+
+        constellationformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText constellation form");
+                    int error_code=character.setConstellation(constellationformET.getText().toString());
+                    constellationformET.setError(FormPresenter.getError(error_code,Fields_to_validate.CONSTELLATION_FORM));
+                }else{
+                    Log.d(TAG,"Input EditText constellation form");
+                }
+            }
+        });
+
+        hpformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText hp form");
+                    int err_code=character.setHp(hpformET.getText().toString());
+                    hpformET.setError(FormPresenter.getError(err_code,Fields_to_validate.HP_FORM));
+                }else{
+                    Log.d(TAG,"Input EditText hp form");
+                }
+            }
+        });
+
+
+        atkformET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText atk form");
+                    int err_code=character.setAtk(atkformET.getText().toString());
+                    atkformET.setError(FormPresenter.getError(err_code,Fields_to_validate.ATK_FORM));
+                }else{
+                    Log.d(TAG,"Input EditText atk form");
+                }
+            }
+        });
+
+
+        defET.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if(!hasFocus){
+                    Log.d(TAG,"Exit EditText def form");
+                    int err_code=character.setDef(defET.getText().toString());
+                    defET.setError(FormPresenter.getError(err_code,Fields_to_validate.DEF_FORM));
+                }else{
+                    Log.d(TAG,"Input EditText def form");
+                }
+            }
+        });
+
 
     }
     @Override

@@ -139,13 +139,13 @@ public class CharacterEntity extends RealmObject {
                 try{
                     DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
                     datetoadd=LocalDate.parse(create_date,formatters);
-                    this.create_date =datetoadd.toString();
+                    this.create_date =create_date;
                     rsult=0;
                 }catch (Exception e){
                     try{
                         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
                         datetoadd=LocalDate.parse(create_date,formatters);
-                        this.create_date =datetoadd.toString();
+                        this.create_date =create_date;
                         rsult=0;
                     }catch (Exception ex){
                         rsult=3;

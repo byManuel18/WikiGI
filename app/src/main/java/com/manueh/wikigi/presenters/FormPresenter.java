@@ -18,6 +18,8 @@ import com.manueh.wikigi.models.CharacterModle;
 import com.manueh.wikigi.views.Form_activity;
 import com.manueh.wikigi.views.MyApplication;
 
+import java.util.List;
+
 public class FormPresenter implements IFormInterface.Presenter {
 
     private IFormInterface.View view;
@@ -255,5 +257,26 @@ public class FormPresenter implements IFormInterface.Presenter {
         }else{
             view.NoCharacterSaved();
         }
+    }
+
+    @Override
+    public void OnClickEditButton(CharacterEntity cn) {
+        if(charactermodle.Update(cn)){
+            view.CharacterSaved();
+            view.CloseActivity();
+        }else{
+            view.NoCharacterSaved();
+        }
+    }
+
+    @Override
+    public CharacterEntity GetCharacterbyID(String id) {
+        return  charactermodle.getCharacterEntity(id);
+    }
+
+    @Override
+    public List<String> GetValueSpinner(Fields_to_validate spinner) {
+
+        return charactermodle.getSpinnersValues(spinner);
     }
 }

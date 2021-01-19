@@ -22,5 +22,7 @@ public interface IListInterface {
         void CharacterDeleted();
         ArrayList<CharacterEntity> getAllItems();
         void SetItemsFristTime();
+        boolean DeleteCharacterEntity(String id);
+        boolean InsertItemAgain(CharacterEntity ce);
     }
 }

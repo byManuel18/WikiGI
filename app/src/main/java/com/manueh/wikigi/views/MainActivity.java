@@ -127,10 +127,13 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
             switch (direction){
                 case ItemTouchHelper.LEFT:
                     addagain=items.get(position);
-                    items.remove(position);
-                    n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
-                    adaptador.notifyItemRemoved(position);
-                    presenter.CharacterDeleted();
+                    if(presenter.DeleteCharacterEntity(addagain.getId())){
+                        items.remove(position);
+                        n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+                        adaptador.notifyItemRemoved(position);
+                        presenter.CharacterDeleted();
+                    }
+
                     break;
                 case ItemTouchHelper.RIGHT:
                     break;
@@ -161,6 +164,12 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         }
         if(id==R.id.action_search){
             presenter.OnClickSearch();
+        }
+        if(id==R.id.action_refresh){
+            Log.d("Refres","Pasa");
+            items.clear();
+            items.addAll(presenter.getAllItems());
+            n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
         }
 
         return super.onOptionsItemSelected(item);
@@ -198,9 +207,12 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
                 Snackbar.LENGTH_LONG).setAction(getString(R.string.undo)+addagain.getName()+"?", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                items.add(position2,addagain);
-                n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
-                adaptador.notifyItemInserted(position2);
+                if(presenter.InsertItemAgain(addagain)){
+                    items.add(position2,addagain);
+                    n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+                    adaptador.notifyItemInserted(position2);
+                }
+
             }
         }).show();
     }
@@ -212,10 +224,10 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
 
     @Override
     protected void onResume() {
+        super.onResume();
         items.clear();
         items.addAll(presenter.getAllItems());
         n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
-        super.onResume();
 
     }
 
