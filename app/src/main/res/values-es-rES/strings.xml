@@ -70,4 +70,6 @@
     <string name="rol_error_novalue">Ningún valor elegido para ROL</string>
     <string name="imagengalery_error_novalue">Ningún valor elegido para IMAGEN</string>
     <string name="error_cant_save">ERROR. Personage no guardado</string>
+    <string name="error_cant_delete">ERROR.PErsonaje no eliminado</string>
+    <string name="button_edit">Editar</string>
 </resources>

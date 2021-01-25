@@ -17,6 +17,8 @@ public interface IFormInterface {
         void SelectPicture();
         void CharacterSaved();
         void NoCharacterSaved();
+        void ShowDeleteOk();
+        void ShowDeleteFail();
 
     }
 
@@ -31,6 +33,7 @@ public interface IFormInterface {
         void OnClickEditButton(CharacterEntity cn);
         CharacterEntity GetCharacterbyID(String id);
         List<String> GetValueSpinner(Fields_to_validate spinner);
+        void DeleteCharacterEntity(String id);
     }
 
 }

@@ -528,7 +528,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
 
         if(id!=null){
             //Recupero info
-            save.setText("Editar");
+            save.setText(R.string.button_edit);
             toedit=fpresenter.GetCharacterbyID(id);
             if(toedit!=null){
                 nameET.setText(toedit.getName());
@@ -851,11 +851,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     Log.d(TAG,"Yes button clicked");
-                    Toast toast1 =
-                            Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_delete_acept_done), Toast.LENGTH_LONG);
-
-                    toast1.show();
-                    fpresenter.CloseFormActivity();
+                    fpresenter.DeleteCharacterEntity(toedit.getId());
                 }
             });
 
@@ -954,6 +950,22 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     public void NoCharacterSaved() {
         Toast toast =
                 Toast.makeText(getApplicationContext(),R.string.title_alert_save_acept_done, Toast.LENGTH_SHORT);
+    }
+
+    @Override
+    public void ShowDeleteOk() {
+        Toast toast1 =
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.title_alert_delete_acept_done), Toast.LENGTH_LONG);
+
+        toast1.show();
+    }
+
+    @Override
+    public void ShowDeleteFail() {
+        Toast toast1 =
+                Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_cant_delete), Toast.LENGTH_LONG);
+
+        toast1.show();
     }
 
     @Override

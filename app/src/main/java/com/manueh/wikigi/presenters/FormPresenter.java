@@ -279,4 +279,14 @@ public class FormPresenter implements IFormInterface.Presenter {
 
         return charactermodle.getSpinnersValues(spinner);
     }
+
+    @Override
+    public void DeleteCharacterEntity(String id) {
+        if(charactermodle.DeleteCharacter(id)){
+            view.ShowDeleteOk();
+            this.CloseFormActivity();
+        }else{
+            view.ShowDeleteFail();
+        }
+    }
 }

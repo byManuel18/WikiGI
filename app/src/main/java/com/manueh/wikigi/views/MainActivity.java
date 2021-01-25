@@ -227,6 +227,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         super.onResume();
         items.clear();
         items.addAll(presenter.getAllItems());
+        adaptador.notifyDataSetChanged();
         n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
 
     }

@@ -102,4 +102,6 @@
     <string name="weapons_error_novalue">No value choose for WEAPONS</string>
     <string name="imagengalery_error_novalue">No value choose for IMAGEN</string>
     <string name="error_cant_save">ERROR. Character no sabed</string>
+    <string name="error_cant_delete">ERROR. Character no deleted</string>
+    <string name="button_edit">Edit</string>
 </resources>
