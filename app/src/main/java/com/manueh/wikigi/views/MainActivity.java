@@ -18,6 +18,7 @@ import com.manueh.wikigi.presenters.ListPresenter;
 
 import androidx.annotation.ColorRes;
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     private CharacterAdapter adaptador;
     private RecyclerView recyclerView;
     private TextView n_items;
+    private int order=-1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -167,8 +169,10 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         }
         if(id==R.id.action_refresh){
             Log.d("Refres","Pasa");
+            order=-1;
             items.clear();
             items.addAll(presenter.getAllItems());
+            adaptador.notifyDataSetChanged();
             n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
         }
 
@@ -198,7 +202,8 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     @Override
     public void startSearchActivity() {
         Intent intent=new Intent(getApplicationContext(),Search_Activity.class);
-        startActivity(intent);
+        //startActivity(intent);
+        startActivityForResult(intent,0);
     }
 
     @Override
@@ -210,6 +215,7 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
                 if(presenter.InsertItemAgain(addagain)){
                     items.add(position2,addagain);
                     n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+                    adaptador.notifyDataSetChanged();
                     adaptador.notifyItemInserted(position2);
                 }
 
@@ -225,10 +231,14 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     @Override
     protected void onResume() {
         super.onResume();
-        items.clear();
-        items.addAll(presenter.getAllItems());
-        adaptador.notifyDataSetChanged();
-        n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+        Log.d("Orden", "Resume");
+        if(order==-1){
+            items.clear();
+            items.addAll(presenter.getAllItems());
+            adaptador.notifyDataSetChanged();
+            n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+        }
+
 
     }
 
@@ -250,5 +260,40 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
     @Override
     protected void onDestroy() {
         super.onDestroy();
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("Orden", "Result");
+        if (resultCode == RESULT_CANCELED) {
+            order=-1;
+            // Si es así mostramos mensaje de cancelado por pantalla.
+            Toast.makeText(this, "Resultado cancelado", Toast.LENGTH_SHORT)
+                    .show();
+        }else{
+            order=0;
+            String bydate=null;
+            bydate=data.getExtras().getString("DATE");
+            String tier=null;
+            tier=data.getExtras().getString("TIER");
+            String name=null;
+            name=data.getExtras().getString("NAME");
+            items.clear();
+            Log.d(TAG, bydate+tier+name);
+            if(name!=null&&tier!=null&&bydate!=null){
+                Log.d("ALL", "pasa: ");
+                items.addAll(presenter.searchbyDateNameTier(name,bydate,tier));
+            }else if(name!=null){
+                items.addAll(presenter.searchbyName(name));
+            }else if(bydate!=null){
+                items.addAll(presenter.searchbyDate(bydate));
+            }else if(tier!=null){
+                items.addAll(presenter.searchbyTier(tier));
+            }
+
+            adaptador.notifyDataSetChanged();
+            n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
+        }
     }
 }

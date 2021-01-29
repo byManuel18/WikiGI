@@ -104,4 +104,6 @@
     <string name="error_cant_save">ERROR. Character no sabed</string>
     <string name="error_cant_delete">ERROR. Character no deleted</string>
     <string name="button_edit">Edit</string>
+    <string name="search_by_tier" translatable="false">Tier</string>
+    <string name="search_by_all">All</string>
 </resources>

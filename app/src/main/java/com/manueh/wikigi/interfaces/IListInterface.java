@@ -24,5 +24,9 @@ public interface IListInterface {
         void SetItemsFristTime();
         boolean DeleteCharacterEntity(String id);
         boolean InsertItemAgain(CharacterEntity ce);
+        ArrayList<CharacterEntity> searchbyName(String name);
+        ArrayList<CharacterEntity> searchbyDate(String date);
+        ArrayList<CharacterEntity> searchbyTier(String tier);
+        ArrayList<CharacterEntity> searchbyDateNameTier(String name,String date,String tier);
     }
 }

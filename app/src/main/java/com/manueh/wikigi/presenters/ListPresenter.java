@@ -227,4 +227,24 @@ public class ListPresenter implements IListInterface.Presenter {
         return data.insertNOIDGENERATE(ce);
     }
 
+    @Override
+    public ArrayList<CharacterEntity> searchbyName(String name) {
+        return new CharacterModle().SearchbyName(name);
+    }
+
+    @Override
+    public ArrayList<CharacterEntity> searchbyDate(String date) {
+        return  new CharacterModle().SearchbyDate(date);
+    }
+
+    @Override
+    public ArrayList<CharacterEntity> searchbyTier(String tier) {
+        return  new CharacterModle().SearchbyTier(tier);
+    }
+
+    @Override
+    public ArrayList<CharacterEntity> searchbyDateNameTier(String name, String date, String tier) {
+        return  new CharacterModle().SearchbyDateNameTier(name,date,tier);
+    }
+
 }
