@@ -194,6 +194,7 @@ public class FormPresenter implements IFormInterface.Presenter {
                             break;
                         case 2:
                             ch=MyApplication.getContext().getResources().getString(R.string.weapons_error_novalue);
+                            break;
                         default:
                             ch= MyApplication.getContext().getResources().getString(R.string.name_error_default);
                     }

@@ -268,9 +268,6 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
         Log.d("Orden", "Result");
         if (resultCode == RESULT_CANCELED) {
             order=-1;
-            // Si es así mostramos mensaje de cancelado por pantalla.
-            Toast.makeText(this, "Resultado cancelado", Toast.LENGTH_SHORT)
-                    .show();
         }else{
             order=0;
             String bydate=null;

@@ -209,6 +209,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
             @Override
             public void onClick(View v) {
                 Intent i = getIntent();
+                boolean finish=false;
                 /*if(cdate.getText().toString().length()>0||name.getText().toString().length()>0){
                     Toast toast1 =
                             Toast.makeText(getApplicationContext(),getResources().getString(R.string.quantity_list_result), Toast.LENGTH_SHORT);
@@ -230,6 +231,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                     if(name!=null&&name.getText().toString().length()>0){
                         i.putExtra("NAME",name.getText().toString().toUpperCase());
                         setResult(RESULT_OK, i);
+                        finish=true;
                     }else{
                         Toast toast1 =
                                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_search), Toast.LENGTH_SHORT);
@@ -239,6 +241,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                     if(cdate!=null&&cdate.getText().toString().length()>0){
                         i.putExtra("DATE",cdate.getText().toString());
                         setResult(RESULT_OK, i);
+                        finish=true;
                     }else{
                         Toast toast1 =
                                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_search), Toast.LENGTH_SHORT);
@@ -248,6 +251,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                     if(spinner_tier_search!=null&&!spinner_tier_search.getSelectedItem().toString().equals(adpater2.getPosition(MyApplication.getContext().getString(R.string.spinner_tier_title)))){
                         i.putExtra("TIER",spinner_tier_search.getSelectedItem().toString());
                         setResult(RESULT_OK, i);
+                        finish=true;
                     }else{
                         Toast toast1 =
                                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_search), Toast.LENGTH_SHORT);
@@ -261,6 +265,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                         i.putExtra("DATE",cdate.getText().toString());
                         i.putExtra("NAME",name.getText().toString().toUpperCase());
                         setResult(RESULT_OK, i);
+                        finish=true;
                     }else{
                         Toast toast1 =
                                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_search), Toast.LENGTH_SHORT);
@@ -268,7 +273,7 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
                     }
 
                 }
-                if(code>0){
+                if(finish){
                     finish();
                 }
 
