@@ -101,6 +101,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
     private static final int REQUEST_SELECT_IMAGE = 201;
     private Switch switch_equip;
     private CharacterEntity toedit=null;
+    private Button cancel_button;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -124,6 +125,7 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setTitle(getResources().getString(R.string.title_activity_form_activity));
         save=findViewById(R.id.save_button);
+        cancel_button=findViewById(R.id.cancel_button);
         img_galery=findViewById(R.id.image_galery);
         switch_equip=findViewById(R.id.switch_equip);
         rtform=findViewById(R.id.rtform);
@@ -191,6 +193,13 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 },Year, Month, Day);
                 // Mostrar el calendario
                 datePickerDialog.show();
+            }
+        });
+
+        cancel_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fpresenter.CloseFormActivity();
             }
         });
 
