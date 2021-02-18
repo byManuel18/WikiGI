@@ -252,7 +252,7 @@ public class FormPresenter implements IFormInterface.Presenter {
 
     @Override
     public void onClickSaveButton(CharacterEntity cn) {
-        if(charactermodle.insert(cn)){
+        if(charactermodle.insert(cn).length()>0){
             view.CharacterSaved();
             view.CloseActivity();
         }else{

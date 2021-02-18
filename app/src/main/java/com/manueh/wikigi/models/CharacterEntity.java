@@ -9,6 +9,7 @@ import com.manueh.wikigi.views.MyApplication;
 
 import java.sql.DatabaseMetaData;
 import java.sql.Date;
+import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Matcher;
@@ -127,25 +128,63 @@ public class CharacterEntity extends RealmObject {
     public int setCreate_date(String create_date) {
         int rsult=-1;
         if(create_date!=null&&create_date.length()>0){
-            //Pattern pat = Pattern.compile("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))");
-            //Pattern pat2= Pattern.compile("([12]\\d{3}/(0[1-9]|1[0-2])/(0[1-9]|[12]\\d|3[01]))");
             Pattern pat3=Pattern.compile("^(?:3[01]|[12][0-9]|0?[1-9])([\\-/.])(0?[1-9]|1[1-2])\\1\\d{4}$");
-            //Matcher mat = pat.matcher(create_date);
-            //Matcher mat2=pat2.matcher(create_date);
             Matcher mat3=pat3.matcher(create_date);
-            //mat.matches()||mat2.matches()
             if(mat3.matches()){
                 LocalDate datetoadd;
+                String day="";
+                String moth="";
+                String year="";
                 try{
+                    SimpleDateFormat f=new SimpleDateFormat("dd-MM-yyyy");
+                    f.setLenient(false);
+                    f.parse(create_date);
                     DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd-MM-yyyy");
-                    datetoadd=LocalDate.parse(create_date,formatters);
-                    this.create_date =create_date;
+                    try {
+                        datetoadd=LocalDate.parse(create_date,formatters);
+                    }catch (Exception c){
+                        formatters = DateTimeFormatter.ofPattern("d-M-yyyy");
+                        datetoadd=LocalDate.parse(create_date,formatters);
+                    }
+
+                    if(datetoadd.getDayOfMonth()>9){
+                        day=Integer.toString(datetoadd.getDayOfMonth());
+                    }else{
+                        day="0"+Integer.toString(datetoadd.getDayOfMonth());
+                    }
+                    if((datetoadd.getMonthValue())>9){
+                        moth=Integer.toString(datetoadd.getMonthValue());
+                    }else{
+                        moth="0"+Integer.toString(datetoadd.getMonthValue());
+                    }
+                    year=Integer.toString(datetoadd.getYear());
+                    this.create_date=day+"/"+moth+"/"+year;
                     rsult=0;
                 }catch (Exception e){
                     try{
+                        SimpleDateFormat f=new SimpleDateFormat("dd/MM/yyyy");
+                        f.setLenient(false);
+                        f.parse(create_date);
                         DateTimeFormatter formatters = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-                        datetoadd=LocalDate.parse(create_date,formatters);
-                        this.create_date =create_date;
+                        try {
+                            datetoadd=LocalDate.parse(create_date,formatters);
+                        }catch (Exception c){
+                            formatters = DateTimeFormatter.ofPattern("d/M/yyyy");
+                            datetoadd=LocalDate.parse(create_date,formatters);
+                        }
+                        if(datetoadd.getDayOfMonth()>9){
+                            day=Integer.toString(datetoadd.getDayOfMonth());
+                        }else{
+                            day="0"+Integer.toString(datetoadd.getDayOfMonth());
+                        }
+                        if((datetoadd.getMonthValue())>9){
+                            moth=Integer.toString(datetoadd.getMonthValue());
+                        }else{
+                            moth="0"+Integer.toString(datetoadd.getMonthValue());
+                        }
+                        year=Integer.toString(datetoadd.getYear());
+                        this.create_date=day+"/"+moth+"/"+year;
+
                         rsult=0;
                     }catch (Exception ex){
                         rsult=3;
@@ -169,6 +208,7 @@ public class CharacterEntity extends RealmObject {
        return 0----->Correct
        return 1 ----> Error,hp empty
        return 2---> Error, hp can only contain integer numbers
+       return 3 ----> Error, hp can only contain positive number
      */
     public int setHp(String hp) {
         int result=0;
@@ -272,7 +312,7 @@ public class CharacterEntity extends RealmObject {
 
     public int setWeapon(String weapon){
         int error=0;
-        if(weapon==null){
+        if(weapon==null||weapon.length()<1){
             error=1;
         }else if(weapon.equals(MyApplication.getContext().getString(R.string.spinner_title))){
             error=2;

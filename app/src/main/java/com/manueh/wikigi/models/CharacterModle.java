@@ -18,11 +18,11 @@ public class CharacterModle {
     public ArrayList<CharacterEntity> getAllItemsToList(){
         ArrayList<CharacterEntity> allitems=new ArrayList<>();
         ArrayList<CharacterEntity> resumeAll=new ArrayList<>();
-        try{
-            Realm realm=Realm.getDefaultInstance();
+
+        try (Realm realm = Realm.getDefaultInstance()){
+            realm.beginTransaction();
             RealmResults<CharacterEntity> result=realm.where(CharacterEntity.class).findAll();
             allitems.addAll(realm.copyFromRealm(result));
-            realm.close();
             for (CharacterEntity c: allitems) {
                 CharacterEntity ir = new CharacterEntity();
                 ir.setImage(c.getImage());
@@ -39,48 +39,46 @@ public class CharacterModle {
                 ir.setRating(c.getRating());
                 resumeAll.add(ir);
             }
-        }catch (Exception e){
-
+            realm.commitTransaction();
         }
+        /*Realm realm=Realm.getDefaultInstance();
+        try{
+
+
+        }catch (Exception e){
+            realm.close();
+        }*/
 
         return resumeAll;
     }
-    public boolean insert(CharacterEntity character){
-        boolean inserted=true;
-        character.setId(UUID.randomUUID().toString());
-        Realm realm=Realm.getDefaultInstance();
+    public String insert(CharacterEntity character){
+        String inserted="";
+        String id=UUID.randomUUID().toString();
+        character.setId(id);
         if(character!=null){
-            try{
+            try (Realm realm = Realm.getDefaultInstance()){
                 realm.beginTransaction();
                 realm.copyToRealm(character);
-                realm.commitTransaction();
-
-                realm.close();
+                inserted=id;
                 Log.d("SI", "SIVA");
-            }catch (Exception ex){
-                inserted=false;
-                Log.d("NO", "NOVA");
+                realm.commitTransaction();
             }
+
         }else{
-            inserted=false;
+            inserted="";
         }
         return inserted;
     }
 
     public boolean insertNOIDGENERATE(CharacterEntity character){
-        boolean inserted=true;
-        Realm realm=Realm.getDefaultInstance();
+        boolean inserted=false;
+
         if(character!=null){
-            try{
+            try (Realm realm = Realm.getDefaultInstance()){
                 realm.beginTransaction();
                 realm.copyToRealm(character);
                 realm.commitTransaction();
-
-                realm.close();
-                Log.d("SI", "SIVA");
-            }catch (Exception ex){
-                inserted=false;
-                Log.d("NO", "NOVA");
+                inserted=true;
             }
         }else{
             inserted=false;
@@ -90,18 +88,14 @@ public class CharacterModle {
 
     public boolean Update(CharacterEntity character){
         boolean updated=false;
-        Realm realm=Realm.getDefaultInstance();
+
         if(character!=null){
-            try{
+            try (Realm realm = Realm.getDefaultInstance()) {
                 realm.beginTransaction();
                 realm.copyToRealmOrUpdate(character);
                 realm.commitTransaction();
-                updated=true;
-                realm.close();
-            }catch (Exception e){
-
+                updated = true;
             }
-
         }
 
         return updated;
@@ -109,16 +103,11 @@ public class CharacterModle {
 
     public CharacterEntity getCharacterEntity(String id){
         CharacterEntity ce=null;
-        Realm realm=Realm.getDefaultInstance();
-
         if(id!=null){
-            try{
+            try (Realm realm = Realm.getDefaultInstance()){
                 realm.beginTransaction();
                 ce=realm.where(CharacterEntity.class).equalTo("id", id).findFirst();
                 realm.commitTransaction();
-                realm.close();
-            }catch (Exception e){
-
             }
 
         }
@@ -127,20 +116,16 @@ public class CharacterModle {
 
     public boolean DeleteCharacter(String  id){
         boolean deleted=false;
-        Realm realm=Realm.getDefaultInstance();
+
         if(id!=null){
-            try{
+            try (Realm realm = Realm.getDefaultInstance()){
                 realm.beginTransaction();
                 CharacterEntity characterRealm = realm.where(CharacterEntity.class)
                         .equalTo("id",id)
                         .findFirst();
-
                 characterRealm.deleteFromRealm();
                 realm.commitTransaction();
-                realm.close();
                 deleted=true;
-            }catch (Exception e){
-
             }
         }
 
@@ -169,7 +154,7 @@ public class CharacterModle {
                 realm.commitTransaction();
                 realm.close();
             }catch (Exception e){
-
+                realm.close();
             }
             for(CharacterEntity ce:celist){
                 if(typeSpinner==Fields_to_validate.ELEMENT_FORM){
@@ -188,8 +173,9 @@ public class CharacterModle {
     public ArrayList<CharacterEntity> SearchbyName(String name){
         ArrayList<CharacterEntity> allitems=new ArrayList<>();
         ArrayList<CharacterEntity> resumeAll=new ArrayList<>();
+        Realm realm=Realm.getDefaultInstance();
         try{
-            Realm realm=Realm.getDefaultInstance();
+
             RealmResults<CharacterEntity> result=realm.where(CharacterEntity.class).equalTo("name",name).findAll();
             allitems.addAll(realm.copyFromRealm(result));
             realm.close();
@@ -210,7 +196,7 @@ public class CharacterModle {
                 resumeAll.add(ir);
             }
         }catch (Exception e){
-
+            realm.close();
         }
 
         return resumeAll;
@@ -218,8 +204,9 @@ public class CharacterModle {
     public ArrayList<CharacterEntity> SearchbyTier(String tier){
         ArrayList<CharacterEntity> allitems=new ArrayList<>();
         ArrayList<CharacterEntity> resumeAll=new ArrayList<>();
+        Realm realm=Realm.getDefaultInstance();
         try{
-            Realm realm=Realm.getDefaultInstance();
+
             RealmResults<CharacterEntity> result=realm.where(CharacterEntity.class).equalTo("tier",tier).findAll();
             allitems.addAll(realm.copyFromRealm(result));
             realm.close();
@@ -240,7 +227,7 @@ public class CharacterModle {
                 resumeAll.add(ir);
             }
         }catch (Exception e){
-
+            realm.close();
         }
 
         return resumeAll;
@@ -249,8 +236,9 @@ public class CharacterModle {
     public ArrayList<CharacterEntity> SearchbyDate(String date){
         ArrayList<CharacterEntity> allitems=new ArrayList<>();
         ArrayList<CharacterEntity> resumeAll=new ArrayList<>();
+        Realm realm=Realm.getDefaultInstance();
         try{
-            Realm realm=Realm.getDefaultInstance();
+
             RealmResults<CharacterEntity> result=realm.where(CharacterEntity.class).equalTo("create_date",date).findAll();
             allitems.addAll(realm.copyFromRealm(result));
             realm.close();
@@ -271,7 +259,7 @@ public class CharacterModle {
                 resumeAll.add(ir);
             }
         }catch (Exception e){
-
+            realm.close();
         }
 
         return resumeAll;
@@ -280,8 +268,9 @@ public class CharacterModle {
     public ArrayList<CharacterEntity> SearchbyDateNameTier(String name,String date,String tier){
         ArrayList<CharacterEntity> allitems=new ArrayList<>();
         ArrayList<CharacterEntity> resumeAll=new ArrayList<>();
+        Realm realm=Realm.getDefaultInstance();
         try{
-            Realm realm=Realm.getDefaultInstance();
+
             //realm.where(CharacterEntity.class).equalTo("create_date",date).and().equalTo("name",name).and().equalTo("tier",tier).findAll();
             RealmResults<CharacterEntity> result=realm.where(CharacterEntity.class).equalTo("create_date",date).and().
                     equalTo("name",name).and().equalTo("tier",tier).findAll();
@@ -304,7 +293,7 @@ public class CharacterModle {
                 resumeAll.add(ir);
             }
         }catch (Exception e){
-
+            realm.close();
         }
 
         return resumeAll;
