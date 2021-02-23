@@ -38,13 +38,13 @@ import static org.hamcrest.Matchers.is;
 
 @LargeTest
 @RunWith(AndroidJUnit4.class)
-public class ListFormTest {
+public class ListaFormSearchTest {
 
     @Rule
     public ActivityTestRule<Logotype> mActivityTestRule = new ActivityTestRule<>(Logotype.class);
 
     @Test
-    public void listFormTest() {
+    public void listaFormSearchTest() {
         try{
             Thread.sleep(6000);
         }catch (Exception c){
@@ -68,7 +68,7 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 0)));
-        textInputEditText.perform(scrollTo(), replaceText("PRUEBA"), closeSoftKeyboard());
+        textInputEditText.perform(scrollTo(), replaceText("Prueba "), closeSoftKeyboard());
 
         ViewInteraction textInputEditText2 = onView(
                 allOf(withId(R.id.constellation_textinputedit),
@@ -78,7 +78,7 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 2)));
-        textInputEditText2.perform(scrollTo(), replaceText("Una"), closeSoftKeyboard());
+        textInputEditText2.perform(scrollTo(), replaceText("cualquiera"), closeSoftKeyboard());
 
         ViewInteraction textInputEditText3 = onView(
                 allOf(withId(R.id.atk_textInputEditText),
@@ -88,7 +88,7 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 4)));
-        textInputEditText3.perform(scrollTo(), replaceText("3"), closeSoftKeyboard());
+        textInputEditText3.perform(scrollTo(), replaceText("10"), closeSoftKeyboard());
 
         ViewInteraction textInputEditText4 = onView(
                 allOf(withId(R.id.hp_textinputEditText),
@@ -98,7 +98,7 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 9)));
-        textInputEditText4.perform(scrollTo(), replaceText("5"), closeSoftKeyboard());
+        textInputEditText4.perform(scrollTo(), replaceText("20"), closeSoftKeyboard());
 
         ViewInteraction textInputEditText5 = onView(
                 allOf(withId(R.id.def_textInputEditText),
@@ -108,26 +108,9 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 10)));
-        textInputEditText5.perform(scrollTo(), replaceText("7"), closeSoftKeyboard());
+        textInputEditText5.perform(scrollTo(), replaceText("30"), closeSoftKeyboard());
 
         ViewInteraction appCompatSpinner = onView(
-                allOf(withId(R.id.spinner_tier),
-                        childAtPosition(
-                                allOf(withId(R.id.constraintLayout_form),
-                                        childAtPosition(
-                                                withClassName(is("android.widget.ScrollView")),
-                                                0)),
-                                3)));
-        appCompatSpinner.perform(scrollTo(), click());
-
-        DataInteraction materialTextView = onData(anything())
-                .inAdapterView(childAtPosition(
-                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
-                        0))
-                .atPosition(0);
-        materialTextView.perform(click());
-
-        ViewInteraction appCompatSpinner2 = onView(
                 allOf(withId(R.id.spinner_arm),
                         childAtPosition(
                                 allOf(withId(R.id.constraintLayout_form),
@@ -135,13 +118,30 @@ public class ListFormTest {
                                                 withClassName(is("android.widget.ScrollView")),
                                                 0)),
                                 6)));
+        appCompatSpinner.perform(scrollTo(), click());
+
+        DataInteraction materialTextView = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        materialTextView.perform(click());
+
+        ViewInteraction appCompatSpinner2 = onView(
+                allOf(withId(R.id.spinner_tier),
+                        childAtPosition(
+                                allOf(withId(R.id.constraintLayout_form),
+                                        childAtPosition(
+                                                withClassName(is("android.widget.ScrollView")),
+                                                0)),
+                                3)));
         appCompatSpinner2.perform(scrollTo(), click());
 
         DataInteraction materialTextView2 = onData(anything())
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(2);
+                .atPosition(0);
         materialTextView2.perform(click());
 
         ViewInteraction appCompatSpinner3 = onView(
@@ -158,7 +158,7 @@ public class ListFormTest {
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(3);
+                .atPosition(5);
         materialTextView3.perform(click());
 
         ViewInteraction appCompatSpinner4 = onView(
@@ -175,7 +175,7 @@ public class ListFormTest {
                 .inAdapterView(childAtPosition(
                         withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
                         0))
-                .atPosition(1);
+                .atPosition(0);
         materialTextView4.perform(click());
 
         ViewInteraction appCompatImageView = onView(
@@ -227,17 +227,58 @@ public class ListFormTest {
         materialButton3.perform(scrollTo(), click());
 
         ViewInteraction actionMenuItemView = onView(
-                allOf(withId(R.id.action_refresh), withContentDescription("Refres"),
+                allOf(withId(R.id.action_search), withContentDescription("Busqueda"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
                                         2),
-                                0),
+                                1),
                         isDisplayed()));
         actionMenuItemView.perform(click());
 
+        ViewInteraction appCompatSpinner5 = onView(
+                allOf(withId(R.id.spinner_search),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        appCompatSpinner5.perform(scrollTo(), click());
+
+        DataInteraction materialTextView5 = onData(anything())
+                .inAdapterView(childAtPosition(
+                        withClassName(is("android.widget.PopupWindow$PopupBackgroundView")),
+                        0))
+                .atPosition(1);
+        materialTextView5.perform(click());
+
+        ViewInteraction textInputEditText6 = onView(
+                allOf(withId(R.id.textinputeditext_name),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                4)));
+        textInputEditText6.perform(scrollTo(), replaceText("Prueba "), closeSoftKeyboard());
+
+        ViewInteraction materialButton4 = onView(
+                allOf(withId(R.id.button_search), withText("Buscar"),
+                        childAtPosition(
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                2)));
+        materialButton4.perform(scrollTo(), click());
+
+        ViewInteraction recyclerView = onView(
+                allOf(withId(R.id.recycleViewListCharacter),
+                        childAtPosition(
+                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
+                                0)));
+        recyclerView.perform(actionOnItemAtPosition(0, click()));
+
         ViewInteraction actionMenuItemView2 = onView(
-                allOf(withId(R.id.action_refresh), withContentDescription("Refres"),
+                allOf(withId(R.id.action_delete), withContentDescription("Busqueda"),
                         childAtPosition(
                                 childAtPosition(
                                         withId(R.id.toolbar),
@@ -246,23 +287,24 @@ public class ListFormTest {
                         isDisplayed()));
         actionMenuItemView2.perform(click());
 
-        ViewInteraction recyclerView = onView(
-                allOf(withId(R.id.recycleViewListCharacter),
+        ViewInteraction materialButton5 = onView(
+                allOf(withId(android.R.id.button1), withText("Eliminar"),
                         childAtPosition(
-                                withClassName(is("androidx.constraintlayout.widget.ConstraintLayout")),
-                                0)));
-        recyclerView.perform(actionOnItemAtPosition(9, click()));
+                                childAtPosition(
+                                        withClassName(is("android.widget.ScrollView")),
+                                        0),
+                                3)));
+        materialButton5.perform(scrollTo(), click());
 
-        ViewInteraction appCompatImageButton = onView(
-                allOf(withContentDescription("Desplazarse hacia arriba"),
+        ViewInteraction actionMenuItemView3 = onView(
+                allOf(withId(R.id.action_refresh), withContentDescription("Refres"),
                         childAtPosition(
-                                allOf(withId(R.id.toolbar),
-                                        childAtPosition(
-                                                withClassName(is("com.google.android.material.appbar.AppBarLayout")),
-                                                0)),
-                                1),
+                                childAtPosition(
+                                        withId(R.id.toolbar),
+                                        2),
+                                0),
                         isDisplayed()));
-        appCompatImageButton.perform(click());
+        actionMenuItemView3.perform(click());
     }
 
     private static Matcher<View> childAtPosition(
