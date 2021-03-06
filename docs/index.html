@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="icon" type="image/jpg" href="imagenes/icono.jpg"/>
+    <title>ÍNDICE</title>
+    <script language="javascript" type="text/javascript">
+    function enviar(pagina){
+    document.nombreDelFormulario.action = pagina;
+    document.nombreDelFormulario.submit();
+
+    }
+</script>
+  </head>
+  <body style="background-color:#000000;">
+    <div style="text-align: center;justify-content: center;">
+      <img src="imagenes/icono.jpg" width=30% height=30%></br>
+      <font size=17 color="#FF6A1E">Página inicio de la ayuda</font>
+      <div>
+        <form name="nombreDelFormulario" action="" method="post">
+          <input type="button" value="Ayuda Listado" onClick="enviar('lista.html')"/>
+          <input type="button" value="Ayuda Formulario" onClick="enviar('form.html')"/>
+          <input type="button" value="Ayuda Buscar" onClick="enviar('buscar.html')"/>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>
