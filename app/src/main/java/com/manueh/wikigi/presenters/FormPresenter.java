@@ -290,4 +290,9 @@ public class FormPresenter implements IFormInterface.Presenter {
             view.ShowDeleteFail();
         }
     }
+
+    @Override
+    public void GoHelp() {
+        view.ShowHelp();
+    }
 }

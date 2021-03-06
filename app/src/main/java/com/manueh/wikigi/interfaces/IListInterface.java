@@ -12,6 +12,7 @@ public interface IListInterface {
         void startAboutActivity();
         void startSearchActivity();
         void MessageCharacterDeleted();
+        void ShowHelp();
     }
 
     public interface Presenter {
@@ -28,5 +29,6 @@ public interface IListInterface {
         ArrayList<CharacterEntity> searchbyDate(String date);
         ArrayList<CharacterEntity> searchbyTier(String tier);
         ArrayList<CharacterEntity> searchbyDateNameTier(String name,String date,String tier);
+        void GoHelp();
     }
 }

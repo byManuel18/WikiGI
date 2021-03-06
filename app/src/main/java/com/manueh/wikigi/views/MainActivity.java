@@ -175,6 +175,9 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
             adaptador.notifyDataSetChanged();
             n_items.setText(Integer.toString(items.size())+getString(R.string.quantity_list_result));
         }
+        if(id==R.id.action_help){
+            this.presenter.GoHelp();
+        }
 
         return super.onOptionsItemSelected(item);
     }
@@ -221,6 +224,13 @@ public class MainActivity extends AppCompatActivity implements IListInterface.Vi
 
             }
         }).show();
+    }
+
+    @Override
+    public void ShowHelp() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("HelpType","list");
+        startActivity(intent);
     }
 
     @Override

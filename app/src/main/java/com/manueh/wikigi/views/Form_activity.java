@@ -873,6 +873,8 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
             }).create().show();
 
 
+        }else if(id==R.id.action_help){
+            this.fpresenter.GoHelp();
         }
         return super.onOptionsItemSelected(item);
 
@@ -975,6 +977,13 @@ public class Form_activity extends AppCompatActivity implements IFormInterface.V
                 Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_cant_delete), Toast.LENGTH_LONG);
 
         toast1.show();
+    }
+
+    @Override
+    public void ShowHelp() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("HelpType","form");
+        startActivity(intent);
     }
 
     @Override

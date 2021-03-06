@@ -8,11 +8,13 @@ import android.os.Bundle;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.AdapterView;
@@ -292,6 +294,17 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
     }
 
     @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        int id=item.getItemId();
+        Log.d(TAG,id+ "pasa 1");
+        if(id==R.id.action_help){
+            Log.d(TAG,id+ "pasa 2");
+            this.Spresenter.GoHelp();
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+    @Override
     public void ReturnList() {
         onBackPressed();
     }
@@ -300,6 +313,14 @@ public class Search_Activity extends AppCompatActivity implements ISearchPresent
     public void CloseSearch() {
         finish();
     }
+
+    @Override
+    public void ShowHelp() {
+        Intent intent = new Intent(getApplicationContext(), HelpActivity.class);
+        intent.putExtra("HelpType","search");
+        startActivity(intent);
+    }
+
     @Override
     protected void onStart() {
         super.onStart();

@@ -19,6 +19,7 @@ public interface IFormInterface {
         void NoCharacterSaved();
         void ShowDeleteOk();
         void ShowDeleteFail();
+        void ShowHelp();
 
     }
 
@@ -34,6 +35,7 @@ public interface IFormInterface {
         CharacterEntity GetCharacterbyID(String id);
         List<String> GetValueSpinner(Fields_to_validate spinner);
         void DeleteCharacterEntity(String id);
+        void GoHelp();
     }
 
 }

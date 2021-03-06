@@ -73,4 +73,5 @@
     <string name="error_cant_delete">ERROR.PErsonaje no eliminado</string>
     <string name="button_edit">Editar</string>
     <string name="search_by_all">Todos</string>
+    <string name="title_activity_help">Ayuda</string>
 </resources>

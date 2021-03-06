@@ -247,4 +247,9 @@ public class ListPresenter implements IListInterface.Presenter {
         return  new CharacterModle().SearchbyDateNameTier(name,date,tier);
     }
 
+    @Override
+    public void GoHelp() {
+        this.view.ShowHelp();
+    }
+
 }

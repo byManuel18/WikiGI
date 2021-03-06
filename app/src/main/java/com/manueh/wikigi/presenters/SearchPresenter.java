@@ -18,4 +18,9 @@ public class SearchPresenter implements ISearchPresenter.Presenter {
     public void onClickClose() {
         view.CloseSearch();
     }
+
+    @Override
+    public void GoHelp() {
+        this.view.ShowHelp();
+    }
 }
